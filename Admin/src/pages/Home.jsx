@@ -1,89 +1,72 @@
 import { useState, useRef, useEffect } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faEnvelope, faBell, faUser, faGear, faCircleQuestion, faArrowRightFromBracket, faCaretDown } from "@fortawesome/free-solid-svg-icons";
+import { faEllipsis } from "@fortawesome/free-solid-svg-icons";
 
 import homestyle from "../styles/homestyle.module.css";
-import Sidebar from '../components/Sidebar';
 
-const Home = () => {
-    const profileSettingRef = useRef(null); 
-    const usernameRef = useRef(null); 
-
-    const [showSidebar, setShowSidebar] = useState(false);
-    const [isDialogOpen, setIsDialogOpen] = useState(false);
-
-    const handleShowSideBar = () => {
-        setShowSidebar(!showSidebar);
-    };
-
-    const toggleDialog = () => {
-        setIsDialogOpen(!isDialogOpen);
-    };
-
-    // Close dialog when clicking outside
-    useEffect(() => {
-        const handleClickOutside = (event) => {
-            // If the dialog is open and click happens outside of dialog or username wrapper
-            if (
-                isDialogOpen && 
-                profileSettingRef.current && !profileSettingRef.current.contains(event.target) &&
-                usernameRef.current && !usernameRef.current.contains(event.target)
-            ) {
-                setIsDialogOpen(false); 
-            }
-        };
-
-        // Add event listener when dialog is open
-        document.addEventListener('mousedown', handleClickOutside);
-
-        // Clean up the event listener when the component unmounts or dialog closes
-        return () => {
-            document.removeEventListener('mousedown', handleClickOutside);
-        };
-    }, [isDialogOpen]); 
+const Home = () => { 
 
     return (
-        <div className={`${homestyle.mainContainer} ${showSidebar ? "" : homestyle.hideSidebarGrid}`}>
-            <div className={`${homestyle.sidebar} ${showSidebar ? homestyle.showSidebarWrapper : ""}`}>
-                <Sidebar />
-            </div>
 
-            <div className={homestyle.mainWrapper}>
-                <div className={homestyle.dashboardNav}>
-                    <FontAwesomeIcon icon={faBars} onClick={handleShowSideBar} className={homestyle.barIcon} />
-                    <div className={homestyle.notificationAndProfileWrapper}>
-                        <div className={homestyle.bellIconWrapper}>
-                            <span>1</span>
-                            <FontAwesomeIcon icon={faBell} className={homestyle.bellIcon}/>
-                        </div>
-                        <div className={homestyle.enelopeWrapper}>
-                            <span>1</span>
-                            <FontAwesomeIcon icon={faEnvelope} className={homestyle.envelope}/>
-                        </div>
-                        <div className={homestyle.profilePicWrapper} ref={usernameRef} onClick={toggleDialog}>
+        <div className={homestyle.mainContainer}>
 
-                        </div>
+            <h1>DashBoard</h1>
+            
+            <div className={homestyle.subContainer}>
 
-                        <div className={homestyle.usernameWrapper} ref={usernameRef} onClick={toggleDialog}>
-                            username
-                            <FontAwesomeIcon icon={faCaretDown} />
-                        </div>
+                <div className={homestyle.middleSection}>
 
-                        {/* Custom Dialog */}
-                        {isDialogOpen && (
-                            <div className={homestyle.customDialog} ref={profileSettingRef}>
-                                <h2>John Smith</h2>
-                                <div className={homestyle.iconsAndPicWrapper}>
-                                    <div><FontAwesomeIcon icon={faUser} /> MY Profile</div>
-                                    <div><FontAwesomeIcon icon={faGear} /> Account Setting</div>
-                                    <div><FontAwesomeIcon icon={faCircleQuestion} /> Need Help?</div>
-                                    <div><FontAwesomeIcon icon={faArrowRightFromBracket} /> Sign Out</div>
-                                </div>
-                            </div>
-                        )}
+                    <div className={homestyle.topOfMiddleSection}>
+                        <div className={homestyle.salesBox}>
+                            <h2>Sales <span><FontAwesomeIcon icon={faEllipsis} /></span></h2>
+                        </div>
+                        <div className={homestyle.revenueBox}>
+                            <h2>Revenue <span><FontAwesomeIcon icon={faEllipsis} /></span></h2>
+                        </div>
+                        <div className={homestyle.expensesBox}>
+                            <h2>Expenses <span><FontAwesomeIcon icon={faEllipsis} /></span></h2>
+                        </div>
+                        
+                    </div>
+
+                    <div className={homestyle.customerBoxWrapper}>
+                        <div className={homestyle.customersBox}>
+                            <h2>Customers <span><FontAwesomeIcon icon={faEllipsis} /></span></h2>
+                        </div>
+                    </div>
+
+                    <div className={homestyle.reportWrapper}>
+                        <h2>Reports <span><FontAwesomeIcon icon={faEllipsis} /></span></h2>
+                    </div>
+
+                    <div className={homestyle.recentSalesWrapper}>
+                        <h2>Recent Sales <span><FontAwesomeIcon icon={faEllipsis} /></span></h2>
+                    </div>
+
+                    <div className={homestyle.topSellingWrapper}>
+                        <h2>Top Selling <span><FontAwesomeIcon icon={faEllipsis} /></span></h2>
                     </div>
                 </div>
+
+                <div className={homestyle.rightSection}>
+                    <div className={homestyle.inventoryReportWrapper}>
+                        <h2>Inventory Reports <span><FontAwesomeIcon icon={faEllipsis} /></span></h2>
+                    </div>
+
+                    <div className={homestyle.budgetReportWrapper}>
+                        <h2>Budget Report <span><FontAwesomeIcon icon={faEllipsis} /></span></h2>
+                    </div>
+
+                    <div className={homestyle.websiteTrafficWrapper}>
+                        <h2>Website Traffic <span><FontAwesomeIcon icon={faEllipsis} /></span></h2>
+                    </div>
+
+                    <div className={homestyle.auditLogs}>
+                        <h2>Audit Logs<span><FontAwesomeIcon icon={faEllipsis} /></span></h2>
+                    </div>
+                </div>
+                
             </div>
         </div>
     );

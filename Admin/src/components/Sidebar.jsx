@@ -38,7 +38,12 @@ const Sidebar = () => {
 
     return (
         <div className={sidebarstyle.mainContainer}>
-            <h1>PrimePicks</h1>
+
+            <div className={sidebarstyle.headerWrapper}>
+                <h1>PrimePicks</h1>
+                <p>Admin</p>
+            </div>
+            
 
             <div className={sidebarstyle.selectionContainer}>
                 <ul className={sidebarstyle.listItems}>
@@ -56,10 +61,10 @@ const Sidebar = () => {
                             <FontAwesomeIcon icon={faAngleRight} className={sidebarstyle.angleRightIcon} onClick={hanldeshowProManagementList}/>
                         </div>
                         <ul className={`${sidebarstyle.proManagementList} ${showProManag ? sidebarstyle.ShowProManagementList: ""}`}>
-                            <NavLink>
+                            <NavLink to="/ModifyProducts">
                                 <li>Modify Products</li>
                             </NavLink>
-                            <NavLink>
+                            <NavLink to="/InventoryManagement">
                                 <li>Inventory Management</li>
                             </NavLink>
                         </ul>
@@ -74,13 +79,13 @@ const Sidebar = () => {
                             <FontAwesomeIcon icon={faAngleRight} className={sidebarstyle.angleRightIcon} onClick={hanldeshowProManagementList}/>
                         </div>
                         <ul className={`${sidebarstyle.orderManagementList} ${showOrderManag ? sidebarstyle.showOrderManagementList: ""}`}>
-                            <NavLink>
+                            <NavLink to="/ViewOrderAndStatus">
                                 <li>View Orders</li>
                             </NavLink>
-                            <NavLink>
+                            <NavLink to="/ViewOrderAndStatus">
                                 <li>Order Status Updates</li>
                             </NavLink>
-                            <NavLink>
+                            <NavLink to="/ViewOrderAndStatus">
                                 <li>Customer Notification</li>
                             </NavLink>
                         </ul>
@@ -89,7 +94,7 @@ const Sidebar = () => {
                     <li>
                         <div onClick={() => handleItemClick(4)} className={`${sidebarstyle.listHeaderWrapper} ${activeItem === 4  ? sidebarstyle.active : ''}`}>
                             <FontAwesomeIcon icon={faFileInvoiceDollar}  className={sidebarstyle.icon}/>
-                            <NavLink>
+                            <NavLink to="/Billing">
                                 <p>Billing</p>
                             </NavLink>
                         </div>

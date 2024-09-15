@@ -1,12 +1,11 @@
 .mainContainer{
     width: 100%;
-    padding-top: 2rem;
     text-align: center;
 }
 
-.mainContainer h1{
+.headerWrapper{
     color: #090c9b;
-    font-size: 3rem;
+    font-size: 1rem;
     margin-bottom: 3rem;
 }
 
