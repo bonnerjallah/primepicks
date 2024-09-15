@@ -30,6 +30,11 @@
     background-color: skyblue;
 }
 
+.listItems li ul a{
+    text-decoration: none;
+    color: #090c9b;
+}
+
 .selectionContainer ul li{
     display: flex;
     flex-direction: column;

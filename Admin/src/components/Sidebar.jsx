@@ -53,11 +53,15 @@ const Sidebar = () => {
                             <NavLink>
                                 <p onClick={hanldeshowProManagementList}>Product Management</p>
                             </NavLink>
-                            <FontAwesomeIcon icon={faAngleRight} className={sidebarstyle.angleRightIcon}/>
+                            <FontAwesomeIcon icon={faAngleRight} className={sidebarstyle.angleRightIcon} onClick={hanldeshowProManagementList}/>
                         </div>
                         <ul className={`${sidebarstyle.proManagementList} ${showProManag ? sidebarstyle.ShowProManagementList: ""}`}>
-                            <li>Modify Products</li>
-                            <li>Inventory Management</li>
+                            <NavLink>
+                                <li>Modify Products</li>
+                            </NavLink>
+                            <NavLink>
+                                <li>Inventory Management</li>
+                            </NavLink>
                         </ul>
                     </li>
 
@@ -67,12 +71,18 @@ const Sidebar = () => {
                             <NavLink>
                                 <p onClick={handleShowOrderManagementList}>Order Management</p>
                             </NavLink>
-                            <FontAwesomeIcon icon={faAngleRight} className={sidebarstyle.angleRightIcon}/>
+                            <FontAwesomeIcon icon={faAngleRight} className={sidebarstyle.angleRightIcon} onClick={hanldeshowProManagementList}/>
                         </div>
                         <ul className={`${sidebarstyle.orderManagementList} ${showOrderManag ? sidebarstyle.showOrderManagementList: ""}`}>
-                            <li>View Orders</li>
-                            <li>Order Status Updates</li>
-                            <li>Customer Notification</li>
+                            <NavLink>
+                                <li>View Orders</li>
+                            </NavLink>
+                            <NavLink>
+                                <li>Order Status Updates</li>
+                            </NavLink>
+                            <NavLink>
+                                <li>Customer Notification</li>
+                            </NavLink>
                         </ul>
                     </li>
                     
@@ -91,12 +101,18 @@ const Sidebar = () => {
                             <NavLink>
                                 <p onClick={handleShowAnalaticsList}>Analytics</p>
                             </NavLink>
-                            <FontAwesomeIcon icon={faAngleRight} className={sidebarstyle.angleRightIcon}/>
+                            <FontAwesomeIcon icon={faAngleRight} className={sidebarstyle.angleRightIcon} onClick={hanldeshowProManagementList}/>
                         </div>
                         <ul className={`${sidebarstyle.analiticsList} ${showAnalitics ? sidebarstyle.showAnaliticsList: ""}`}>
-                            <li>Sales Reports</li>
-                            <li>Inventory Reports</li>
-                            <li>Customer Reports</li>
+                            <NavLink>
+                                <li>Sales Reports</li>
+                            </NavLink>
+                            <NavLink>
+                                <li>Inventory Reports</li>
+                            </NavLink>
+                            <NavLink>
+                                <li>Customer Reports</li>
+                            </NavLink>
                         </ul>
                     </li>
 
@@ -106,12 +122,18 @@ const Sidebar = () => {
                             <NavLink>
                                 <p onClick={handleShowNotifiAndAlertList}>Notifications and Alerts</p>
                             </NavLink>
-                            <FontAwesomeIcon icon={faAngleRight} className={sidebarstyle.angleRightIcon}/>
+                            <FontAwesomeIcon icon={faAngleRight} className={sidebarstyle.angleRightIcon} onClick={hanldeshowProManagementList}/>
                         </div>
                         <ul className={`${sidebarstyle.notifyAndAlerts} ${showNotifyAndAlert ? sidebarstyle.showNotifyAndAlertList: ""}`}>
-                            <li>Low Stock Alerts</li>
-                            <li>Order Notifications</li>
-                            <li>Message</li>
+                            <NavLink>
+                                <li>Low Stock Alerts</li>
+                            </NavLink>
+                            <NavLink>
+                                <li>Order Notifications</li>
+                            </NavLink>
+                            <NavLink>
+                                <li>Message</li>
+                            </NavLink>
                         </ul>
                     </li>
                     
