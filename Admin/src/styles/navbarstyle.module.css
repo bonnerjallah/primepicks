@@ -14,7 +14,6 @@
 
 .navBar{
     display: flex;
-    grid-column: 2 / 3; /* Navbar spans the second column */
     align-items: center;
     justify-content: space-between;
     font-size: 1.5rem;
@@ -26,7 +25,6 @@
 }
 
 .sidebar {
-    grid-column: 1 / 2; /* Sidebar in the first column */
     transform: translateX(-400px); 
     transition: transform 1s ease; 
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
@@ -43,10 +41,10 @@
     height: 100dvh;
 }
 
-.mainContainer.hideSidebar {
-    grid-template-columns: 0% 1fr; /* Full width for content when sidebar is hidden */ 
-    height: 100dvh;
+.hideSidebar {
+    grid-template-columns: 0% 1fr; 
 }
+
 
 .barIcon{
     cursor: pointer;

@@ -6,11 +6,11 @@
     display: flex;
     flex-direction: column;
     background-color: #8bc9fc;
-
 }
 
 .mainContainer h1{
     margin: 0 0 1rem 1rem;
+    color: #72195a;
 }
 
 .subContainer{
@@ -33,9 +33,10 @@
 }
 
 .customerBoxWrapper{
-    background-color: white;
+    background-color: aliceblue;
     border-radius: 5px;
     padding: .5rem;
+    color: #090c9b;
 }
 
 .salesBox,
@@ -46,7 +47,8 @@
     border-radius: 5px;
     padding: .5rem;    
     margin: 0 .5rem;
-    background-color: white;
+    background-color: aliceblue;
+    color: #090c9b;
 }
 
 .customersBox{
@@ -76,7 +78,8 @@ h2 span{
 .reportWrapper,
 .recentSalesWrapper,
 .topSellingWrapper{
-    background-color: white;
+    background-color: aliceblue;
+    color: #090c9b;
     height: 20rem;
     border-radius: 5px;
     padding: .5rem;
@@ -86,14 +89,16 @@ h2 span{
 .budgetReportWrapper,
 .websiteTrafficWrapper{
     height: 25rem;
-    background-color: white;
+    background-color: aliceblue;
+    color: #090c9b;
     border-radius: 5px;
     padding: .5rem;
 }
 
 .auditLogs{
     height: 10rem;
-    background-color: white;
+    background-color: aliceblue;
+    color: #090c9b;
     border-radius: 5px;
     padding: .5rem;
 }

@@ -54,13 +54,13 @@ const Nav = () => {
 
     return (
         <div className={`${navbarstyle.mainContainer} ${!hideSidebar ? navbarstyle.hideSidebar : ""}`}>
-            
+
             <div className={`${navbarstyle.sidebar} ${hideSidebar ? navbarstyle.showSidebarWrapper : ""}`}>
                 <Sidebar />
             </div> 
             
 
-            <div className={`${navbarstyle.navBar} ${!hideSidebar ? navbarstyle.fullWidth : ""}`}>
+            <div className={navbarstyle.navBar}>
 
                 <FontAwesomeIcon icon={faBars} onClick={handleShowSideBar} className={navbarstyle.barIcon} />
 
@@ -92,7 +92,7 @@ const Nav = () => {
                         <div className={navbarstyle.customDialog} ref={profileSettingRef}>
                             <h2>John Smith</h2>
                             <div className={navbarstyle.iconsAndPicWrapper}>
-                                <div><FontAwesomeIcon icon={faUser} /> MY Profile</div>
+                                <div><FontAwesomeIcon icon={faUser} /> My Profile</div>
                                 <div><FontAwesomeIcon icon={faGear} /> Account Setting</div>
                                 <div><FontAwesomeIcon icon={faCircleQuestion} /> Need Help?</div>
                                 <div><FontAwesomeIcon icon={faArrowRightFromBracket} /> Sign Out</div>
