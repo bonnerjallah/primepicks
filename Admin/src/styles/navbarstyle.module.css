@@ -48,6 +48,22 @@
 
 .barIcon{
     cursor: pointer;
+    animation: rotateBarBack 800ms ease-in-out forwards;
+}
+
+@keyframes rotateBarBack {
+    0%{transform: rotate(90deg);}
+    100%{transform: rotate(0);}
+}
+
+.barIconRotate{
+    cursor: pointer;
+    animation: rotateBar 800ms ease-in-out forwards;
+}
+
+@keyframes rotateBar {
+    0%{transform: rotate(0);}
+    100%{transform: rotate(90deg);}
 }
 
 

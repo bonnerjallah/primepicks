@@ -62,7 +62,7 @@ const Nav = () => {
 
             <div className={navbarstyle.navBar}>
 
-                <FontAwesomeIcon icon={faBars} onClick={handleShowSideBar} className={navbarstyle.barIcon} />
+                <FontAwesomeIcon icon={faBars} onClick={handleShowSideBar} className={`${navbarstyle.barIcon} ${!hideSidebar ? navbarstyle.barIconRotate : "" }`} />
 
                 <div className={navbarstyle.notificationAndProfileWrapper}>
 

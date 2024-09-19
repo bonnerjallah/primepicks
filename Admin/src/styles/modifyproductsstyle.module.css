@@ -2,7 +2,6 @@
     --border-size: 2px;
 }
 
-
 .mainContainer {
     width: 100%;
     height: calc(100dvh - 4rem); 
@@ -16,7 +15,6 @@
 .mainContainer h1{
     margin: 0 0 1rem 1rem;
     color: #72195a;
-
 }
 
 .addProductWrapper{
@@ -51,7 +49,7 @@ input[type="number"] {
 }
 
 .productListWrapper{
-    border: 1px solid rgb(28, 27, 27);
+    background-color: aliceblue;
     width: 50%;
     height: 100%;
 }

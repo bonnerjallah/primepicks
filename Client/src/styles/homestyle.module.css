@@ -1,0 +1,63 @@
+.Container{
+    border: 2px solid black;
+}
+
+.heroSection{
+    background-image: url("/images/silvershoppingbag.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 40rem;
+}
+
+.heroSection button{
+    width: 7rem;
+    height: 3rem;
+    background-color: rgb(30, 156, 190);
+    position: absolute;
+    bottom: 10rem;
+    right: 20rem;
+    border: none;
+}
+
+.introWrapper{
+    text-align: center;
+    margin-top: 1.6rem;
+}
+
+.introWrapper p{
+    font-size: 1.5rem;
+}
+
+main{
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    padding: 0 10rem;
+}
+
+main h2{
+    text-align: center;
+    margin: 2rem 0;
+}
+
+hr{
+    width: 4rem;
+    border: .5px solid black;
+    align-self: center;
+    margin-bottom: 4rem;
+}
+
+.collectionsWrapper{
+    height: 30rem;
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 3.7rem;
+    margin-bottom: 3rem;
+}
+
+.collectionsWrapper div {
+    width: 29%;
+    height: 45%;
+    border: 2px solid black;
+}
