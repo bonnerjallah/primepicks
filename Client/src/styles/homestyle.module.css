@@ -1,5 +1,5 @@
-.Container{
-    border: 2px solid black;
+:root {
+    --border-size: 2px;
 }
 
 .heroSection{
@@ -11,13 +11,38 @@
 }
 
 .heroSection button{
-    width: 7rem;
+    width: 8rem;
     height: 3rem;
     background-color: rgb(30, 156, 190);
     position: absolute;
     bottom: 10rem;
     right: 20rem;
     border: none;
+    font-size: 1.3rem;
+}
+
+.heroSection button:hover{
+    color: white;
+    cursor: pointer;
+}
+
+.heroSection button::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    border: var(--border-size) solid rgb(30, 156, 190);
+}
+
+.heroSection button:hover::before,
+.heroSection button:focus::before{
+    top: calc(var(--border-size) * -2);
+    left: calc(2px * -2);
+    right: calc(2px * -2);
+    bottom: calc(2px * -2);
+    border-radius: 5px;
 }
 
 .introWrapper{
@@ -38,7 +63,7 @@ main{
 
 main h2{
     text-align: center;
-    margin: 2rem 0;
+    margin: 2.5rem 0;
 }
 
 hr{
@@ -49,15 +74,266 @@ hr{
 }
 
 .collectionsWrapper{
-    height: 30rem;
+    height: 80dvh;
     display: flex;
     flex-wrap: wrap;
-    column-gap: 3.7rem;
+    column-gap: 2rem;
     margin-bottom: 3rem;
+    justify-content: center;
 }
 
-.collectionsWrapper div {
-    width: 29%;
+.collectionsWrapper a {
+    width: 31%;
     height: 45%;
-    border: 2px solid black;
 }
+
+
+.collectiosItemWrapper{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.collectiosItemWrapper p{
+    position: absolute;
+    font-size: 2rem;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9;
+    color: white;
+    text-align: center;
+}
+
+.collectiosItemWrapper img{
+    width: 100%;
+    height: 100%;
+    transition: all 300ms ease-in-out;
+}
+
+.collectiosItemWrapper:hover img{
+    scale: 1.1;
+    transition: all 300ms ease-in-out;
+    cursor: pointer;
+}
+
+.randomPorductContainer{
+    display: flex;
+    column-gap: 2rem;
+    height: 30rem;
+    justify-content: space-between;
+    margin: 3rem 3rem;
+}
+
+.randomProductPriceAndDetails{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.productName{
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.productPrice{
+    font-size: 1.5rem;
+}
+
+.shippingMethod{
+    margin-top: 1rem;
+    font-size: 1.2rem;
+}
+
+.randomProductPriceAndDetails hr{
+    margin: 1rem 0 2rem 0;
+}
+
+
+.addtoCartWrapper{
+    display: flex;
+    width: max-content;
+    height: 3rem;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 .5rem;
+    column-gap: .5rem;
+    margin-bottom: 1rem;
+}
+
+.addtoCartWrapper button{
+    width: 7rem;
+    height: 100%;
+    border-radius: 5px;
+    border: none;
+    background-color: rgb(30, 156, 190);
+    color: white;
+    cursor: pointer;
+    position: relative;
+    align-self: center;
+}
+
+.addtoCartWrapper button::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: var(--border-size) solid rgb(30, 156, 190);
+}
+
+.addtoCartWrapper button:hover::before,
+.addtoCartWrapper button:hover::before{
+    top: calc(var(--border-size) * -2);
+    left: calc(2px * -2);
+    right: calc(2px * -2);
+    bottom: calc(2px * -2);
+    border-radius: 5px;
+}
+
+.addtoCartWrapper :nth-child(2) {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.fullDetailsWrapper {
+    margin-top: 1rem;
+    display: flex;
+    column-gap: .5rem;
+    align-items: center;
+    margin-bottom: 1rem;
+    cursor: pointer;
+}
+
+.fullDetailsWrapper:hover {
+    text-decoration: underline;
+    color: rgb(30, 156, 190);
+}
+
+.rightArrowIcon {
+    transition: transform 800ms ease-in-out;
+} 
+
+.fullDetailsWrapper:hover .rightArrowIcon {
+    transform: translateX(0.5rem); 
+}
+
+
+
+.socialContainer{
+    display: flex;
+    width: 40%;
+    justify-content: space-between;
+}
+
+.socialContainer div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 1rem;
+    column-gap: .5rem;
+    margin-top: 1rem;
+}
+
+.socialContainer div:hover{
+    color: rgb(30, 156, 190);
+}
+
+.peopleSayingWrapper{
+    margin-top: 4rem;
+    height: 35rem;
+    display: flex;
+    column-gap: 1rem;
+    padding: 2rem 0;
+}
+
+.peopleSayingWrapper :first-child img{
+    width: 100%;
+    height: 100%;
+}
+
+.peopleSayingWrapper > *{
+    width: 50%;
+}
+
+.peopleSayingWrapper :nth-child(2) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem;
+    text-align: center;
+    color: rgb(30, 156, 190);
+}
+
+.subscribeWrapper{
+    margin-top: 3rem;
+    height: 20rem;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(119, 174, 189);
+}
+
+.subscribeWrapperHeader{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.subscribeWrapperHeader p{
+    margin-top: -2rem;
+}
+
+.subscribeWrapper hr{
+    margin: 2rem 0;
+}
+
+.subscribeWrapperInputWrapper{
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    row-gap: 1rem;
+}
+
+.subscribeWrapperInputWrapper input{
+    width: 30%;
+    height: 20%;
+}
+
+.subscribeWrapperInputWrapper button{
+    width: 10%;
+    height: 20%;
+    border-radius: 5px;
+    border: none;
+    background-color: rgb(30, 156, 190);
+    color: white;
+    cursor: pointer;
+    position: relative;
+    align-self: center;
+}
+
+.subscribeWrapperInputWrapper button::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: var(--border-size) solid rgb(30, 156, 190);
+}
+
+.subscribeWrapperInputWrapper button:hover::before,
+.subscribeWrapperInputWrapper button:hover::before{
+    top: calc(var(--border-size) * -2);
+    left: calc(2px * -2);
+    right: calc(2px * -2);
+    bottom: calc(2px * -2);
+    border-radius: 5px;
+}
+

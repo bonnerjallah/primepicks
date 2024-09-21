@@ -7,35 +7,47 @@
 nav{
     display: flex;
     justify-content: space-between;
-    padding: .5rem 10rem;
+    align-items: flex-end;
+    padding-left: 10rem;
+    padding-right: 10rem;
+    padding-bottom: .5rem;
     height: max-content;
-    position: fixed;
     width: 100%;
     background-color: black;
+    z-index: 99;
+    position: fixed;
 }
 
 .logoWrapper{
-    width: 10%;
-    height: 100%;
-    position: relative;
-    color:#066782;
+    width: 7%;
     cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.logoWrapper p{
+.logoWrapper a p{
     width: max-content;
     margin-top: -1rem;
+    color:#066782;
 }
 
-.logoWrapper img{
-    border: 2px solid blc;
+.logoWrapper a{
+    text-decoration: none;
+}
+
+.logoWrapper a img{
+    border: 2px solid black;
+    width: 80%;
+    height: 80%;
 }
 
 .linkWrapper{
     display: flex;
+    height: 100%;
     width: 60%;
-    margin-bottom: 2rem;
 }
+
 
 .iconWrapper{
     width: 20%;

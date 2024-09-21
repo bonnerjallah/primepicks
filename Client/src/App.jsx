@@ -2,11 +2,13 @@ import {createBrowserRouter, createRoutesFromElements, Route, RouterProvider} fr
 
 import Home from "./pages/Home"
 import Navbar from "./components/Navbar"
+import MenFashion from "./components/MenFashion"
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Navbar />}>
       <Route path="/" element={<Home />} />
+      <Route path="/MenFashion" element={<MenFashion />} />
 
     </Route>
   )

@@ -1,9 +1,9 @@
 import { Facebook, Instagram } from 'lucide-react'
-import React from 'react'
+import footerstyle from "../styles/footerstyle.module.css"
 
 const Footer = () => {
     return (
-        <div>
+        <div className={footerstyle.mainContainer}>
             <div>
                 <p>Search</p>
                 <p>Gift Card</p>
@@ -18,8 +18,8 @@ const Footer = () => {
                 <p>Do not sell my personal information</p>
             </div>
             <div>
-                <div><Facebook /> Facebook</div>
-                <div><Instagram /> Instagram</div>
+                <p><Facebook /> Facebook</p>
+                <p><Instagram /> Instagram</p>
             </div>
             <div>
                 <p>&copy; 2024, PRIME PICKS</p>

@@ -4,6 +4,9 @@ const cors = require("cors")
 const connectDB = require("./config/db")
 const router = require("./routes/router")
 
+const frontEndUrl = process.env.VITE_FRONTEND_URL
+const PORT = process.env.VITE_PORT || 3001
+
 
 const app = express()
 
@@ -11,7 +14,7 @@ app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: `${frontEndUrl}`,
     methods: ["POST", "GET", "PUT", "DELETE"],
     credentials: true
 }))
@@ -19,9 +22,8 @@ app.use(cors({
 connectDB()
 
 
-
 app.use("/", router)
 
-app.listen(3001, () => {
-    console.log("listing on port 3001")
+app.listen(PORT, () => {
+    console.log(`Listening on port ${PORT}`);
 })

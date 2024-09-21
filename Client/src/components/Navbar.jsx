@@ -63,19 +63,19 @@ const Navbar = () => {
 
     }, [showCustomUserDialog])
 
-    
-
 
     return (
         <>
             <nav>
                 <div className={navbarstyles.logoWrapper}>
-                    <img src="/images/logo.png" alt="" width="100%" height="100%" />
-                    <p>PRIME PICKS</p>
+                    <NavLink to="/">
+                        <img src="/images/logo.png" alt="" width="100%" height="100%" />
+                        <p>PRIME PICKS</p>
+                    </NavLink>
                 </div>
                 <div className={navbarstyles.linkWrapper}>
                     <ul>
-                        <NavLink>
+                        <NavLink to="/">
                             <li>HOME</li>
                         </NavLink>
 

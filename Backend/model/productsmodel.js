@@ -29,11 +29,21 @@ const ProductsSchema = new mongoose.Schema({
 
     rating: {
         rate: {
-            type: Number, 
+            type: String,
+            required: true
         },
         count: {
-            type: Number
+            type: String,
+            required: true
         }
+    },
+
+    sale:{
+        type: String,
+    },
+
+    salepercentage:{
+        type: String
     }
 
 }, {collection: "products"})
