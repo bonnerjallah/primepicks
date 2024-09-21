@@ -11,7 +11,7 @@ import { useState } from "react";
 const backEndUrl = import.meta.env.VITE_BACKENDURL
 
 import RandomTwelve from "../components/RandomTwelve";
-
+import ScrollToTop from "../components/ScrollToTop";
 
 
 const Home = () => {
@@ -66,6 +66,9 @@ const Home = () => {
 
     return (
         <div className={homestyle.Container}>
+            
+            <ScrollToTop />
+
             <div className={homestyle.heroSection}>
                 <a href="#main">
                     <button>Shop Now</button>
@@ -89,35 +92,35 @@ const Home = () => {
                         </div>
                     </NavLink>
                     
-                    <NavLink>
+                    <NavLink to="/WomenFashion">
                         <div className={homestyle.collectiosItemWrapper}>
                             <p>Women Fashion</p>
                             <img src="/images/freestocks.jpg" alt="" width="100%" height="100%" />
                         </div>
                     </NavLink>
 
-                    <NavLink>
+                    <NavLink to="/Shoes">
                         <div className={homestyle.collectiosItemWrapper}>
                             <p>Shoes</p>
                             <img src="/images/shoemodal.jpg" alt="" width="100%" height="100%" />
                         </div>
                     </NavLink>
 
-                    <NavLink>
+                    <NavLink to="/WomenAccessories">
                         <div className={homestyle.collectiosItemWrapper}>
                             <p>Women Accessories</p>
                             <img src="/images/marissa.jpg" alt="" width="100%" height="100%" />
                         </div>
                     </NavLink>
 
-                    <NavLink>
+                    <NavLink to="/Watches">
                         <div className={homestyle.collectiosItemWrapper}>
                             <p>Watches</p>
                             <img src="/images/watch.jpg" alt="" width="100%" height="100%" />
                         </div>
                     </NavLink>
 
-                    <NavLink>
+                    <NavLink to="/MenAccessories">
                         <div className={homestyle.collectiosItemWrapper}>
                             <p>Men Accessories</p>
                             <img src="/images/tiemodal.jpg" alt="" width="100%" height="100%" />
@@ -160,7 +163,7 @@ const Home = () => {
                 <h2>Featured Faves</h2>
                 <hr />
 
-                <div>
+                <div className={homestyle.randomTwelveWrapper}>
                     <RandomTwelve />
                 </div>
 

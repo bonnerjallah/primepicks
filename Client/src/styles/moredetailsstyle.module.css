@@ -1,0 +1,74 @@
+.mainContainer{
+    padding: 7rem  1rem 0 1rem;
+    display: grid;
+    grid-template-columns: 40% 40% 1fr;
+    column-gap: 2rem;
+}
+
+.productDesWrapper{
+    padding: .5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 1rem;
+}
+
+.mightBeIntrestedWrapper{
+}
+
+.productPriceAndDetails{
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.productPriceAndDetails hr{
+    margin: 2rem;
+}
+
+.addtoCartWrapper{
+    display: flex;
+    width: 100%;
+    height: 3rem;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 .5rem;
+    column-gap: .5rem;
+    margin: 2rem 0 1rem 0
+}
+
+.addtoCartWrapper > :last-child {
+    background-color: #013a63;
+}
+
+.addtoCartWrapper button{
+    width: 10rem;
+    height: 100%;
+    border-radius: 5px;
+    border: none;
+    background-color: rgb(30, 156, 190);
+    color: white;
+    cursor: pointer;
+    position: relative;
+    align-self: center;
+}
+
+.addtoCartWrapper button::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: var(--border-size) solid rgb(30, 156, 190);
+}
+
+.addtoCartWrapper button:hover::before,
+.addtoCartWrapper button:hover::before{
+    top: calc(var(--border-size) * -2);
+    left: calc(2px * -2);
+    right: calc(2px * -2);
+    bottom: calc(2px * -2);
+    border-radius: 5px;
+}

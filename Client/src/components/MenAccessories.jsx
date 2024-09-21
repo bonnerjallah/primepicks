@@ -12,9 +12,8 @@ import ScrollToTop from "./ScrollToTop"
 import Footer from "./Footer"
 import { NavLink } from "react-router-dom"
 
-const MenFashion = () => {
 
-    // const {id} = queryString.parse(location.search)
+const MenAccessories = () => {
 
     const [menShopData, setMenShopData] = useState([])
     const [sortBy, setSortBy] = useState("")
@@ -35,7 +34,7 @@ const MenFashion = () => {
                     : elem.price
                 }))
 
-                const menData = formatedData.filter((elem) => elem.category.includes("men's clothing"));
+                const menData = formatedData.filter((elem) => elem.category.includes("men's clothing") && elem.category.includes("accessories"));
 
 
                 setMenShopData(menData)
@@ -98,7 +97,7 @@ const MenFashion = () => {
             <ScrollToTop />
 
             <div className={manfashionstyle.mainContainer}>
-                <h1>Men's Fashion</h1>
+                <h1>Men Accessories</h1>
 
                 <hr />
 
@@ -181,7 +180,6 @@ const MenFashion = () => {
                     )}
                 </div>
 
-
                 <div className={manfashionstyle.paginationWrapper}>
                     <FontAwesomeIcon 
                         icon={faAnglesLeft} 
@@ -211,9 +209,7 @@ const MenFashion = () => {
             
             <Footer />
         </>
-        
-        
     )
 }
 
-export default MenFashion
+export default MenAccessories

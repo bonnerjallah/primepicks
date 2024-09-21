@@ -24,7 +24,7 @@
     height: 2rem;
 }
 
-.allProductsContainer{
+.allProductsContainer {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
@@ -34,9 +34,13 @@
     margin-top: 3rem;
 }
 
+.allProductsContainer a{
+    color: black;
+}
+
 .productContainer{
     border: 1px solid rgb(8, 8, 8);
-    width: 17rem;
+    width: 15rem;
     height: 100%;
     display: grid;
     grid-template-rows: 60% 1fr;
@@ -78,4 +82,23 @@
     font-size: 1.5rem;
 }
 
+.paginationWrapper{
+    border: 1px solid black;
+    width: max-content;
+    height: max-content;
+    display: flex;
+    column-gap: 2rem;
+    margin-top: 2rem;
+    padding: .5rem;
+    
+}
 
+.paginationWrapper li{
+    list-style: none;
+    border: 1px solid black;
+    width: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}

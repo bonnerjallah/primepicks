@@ -12,11 +12,11 @@ import ScrollToTop from "./ScrollToTop"
 import Footer from "./Footer"
 import { NavLink } from "react-router-dom"
 
-const MenFashion = () => {
 
+const WomenFashion = () => {
     // const {id} = queryString.parse(location.search)
 
-    const [menShopData, setMenShopData] = useState([])
+    const [womenStoreData, setWomenStoreData] = useState([])
     const [sortBy, setSortBy] = useState("")
 
     const [currentPage, setCurrentPage] = useState(1)
@@ -35,10 +35,14 @@ const MenFashion = () => {
                     : elem.price
                 }))
 
-                const menData = formatedData.filter((elem) => elem.category.includes("men's clothing"));
+                console.log("formated", formatedData)
+
+                const womenData = formatedData.filter((elem) => elem.category.includes("women's"));
+
+                console.log("woman data", womenData)
 
 
-                setMenShopData(menData)
+                setWomenStoreData(womenData)
 
             } catch (error) {
                 console.log("Error fetching data", error)
@@ -48,11 +52,11 @@ const MenFashion = () => {
     }, [])
 
     //Handle sorting 
-    const handleSortBy = (e) => {
+    const handleSortWomenStoreData = (e) => {
         const selectedValue = e.target.value
         setSortBy(selectedValue)
 
-        let sortedData = [...menShopData]
+        let sortedData = [...womenStoreData]
 
         if(selectedValue === "a-z") {
             sortedData.sort((a, b) => a.title.localeCompare(b.title))
@@ -64,23 +68,23 @@ const MenFashion = () => {
             sortedData.sort((a, b) => parseFloat(b.price) - parseFloat(a.price))
         }
 
-        setMenShopData(sortedData); 
+        setWomenStoreData(sortedData); 
     }
 
     useEffect(() => {
         setCurrentPage(1); // Reset to first page when data changes
-    }, [menShopData]);
+    }, [womenStoreData]);
     
 
     //Get current product to display
     const indexofLastProduct = currentPage * productsPerPage
     const indexOfFirstProduct = indexofLastProduct - productsPerPage
-    const currentProduct = menShopData.slice(indexOfFirstProduct, indexofLastProduct)
+    const currentProduct = womenStoreData.slice(indexOfFirstProduct, indexofLastProduct)
 
     //Pagination logic
     const pageNumbers = []
 
-    const totalProducts = menShopData.length
+    const totalProducts = womenStoreData.length
     const productsToShowPerPage = productsPerPage
 
     for(let i = 1; i <= Math.ceil(totalProducts / productsToShowPerPage); i++) {
@@ -94,11 +98,13 @@ const MenFashion = () => {
 
 
     return (
+
         <>
+
             <ScrollToTop />
 
             <div className={manfashionstyle.mainContainer}>
-                <h1>Men's Fashion</h1>
+                <h1>Women's Fashion</h1>
 
                 <hr />
 
@@ -106,7 +112,7 @@ const MenFashion = () => {
                     
                     Sort By:
 
-                    <select name="" id="" onChange={handleSortBy}>
+                    <select name="" id="" onChange={handleSortWomenStoreData}>
                         <option value=""></option>
                         <option value="a-z">Alphabetically, A-Z</option>
                         <option value="z-a">Alphabetically, Z-A</option>
@@ -116,7 +122,7 @@ const MenFashion = () => {
                 </div>
 
                 <div className={manfashionstyle.allProductsContainer}>
-                    {menShopData && menShopData.length > 0 && (
+                    {womenStoreData && womenStoreData.length > 0 && (
                         currentProduct.map((elem, id) => (
                             <NavLink key={id} to={`/MoreDetails/${elem._id}`}>
                                 <div className={manfashionstyle.productContainer}>
@@ -206,14 +212,10 @@ const MenFashion = () => {
                     />
                 </div>
 
-
             </div>
-            
             <Footer />
         </>
-        
-        
     )
 }
 
-export default MenFashion
+export default WomenFashion

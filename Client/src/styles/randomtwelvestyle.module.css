@@ -10,7 +10,7 @@
 
 .productContainer{
     border: 1px solid rgb(8, 8, 8);
-    width: 17rem;
+    width: 15rem;
     height: 20rem;
     display: flex;
     flex-direction: column;

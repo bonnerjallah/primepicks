@@ -12,11 +12,10 @@ import ScrollToTop from "./ScrollToTop"
 import Footer from "./Footer"
 import { NavLink } from "react-router-dom"
 
-const MenFashion = () => {
 
-    // const {id} = queryString.parse(location.search)
+const Watches = () => {
 
-    const [menShopData, setMenShopData] = useState([])
+    const [watchShopData, setWatchShopData] = useState([])
     const [sortBy, setSortBy] = useState("")
 
     const [currentPage, setCurrentPage] = useState(1)
@@ -35,10 +34,10 @@ const MenFashion = () => {
                     : elem.price
                 }))
 
-                const menData = formatedData.filter((elem) => elem.category.includes("men's clothing"));
+                const watchData = formatedData.filter((elem) => elem.category.includes("watch"));
 
 
-                setMenShopData(menData)
+                setWatchShopData(watchData)
 
             } catch (error) {
                 console.log("Error fetching data", error)
@@ -52,7 +51,7 @@ const MenFashion = () => {
         const selectedValue = e.target.value
         setSortBy(selectedValue)
 
-        let sortedData = [...menShopData]
+        let sortedData = [...watchShopData]
 
         if(selectedValue === "a-z") {
             sortedData.sort((a, b) => a.title.localeCompare(b.title))
@@ -64,23 +63,23 @@ const MenFashion = () => {
             sortedData.sort((a, b) => parseFloat(b.price) - parseFloat(a.price))
         }
 
-        setMenShopData(sortedData); 
+        setWatchShopData(sortedData); 
     }
 
     useEffect(() => {
         setCurrentPage(1); // Reset to first page when data changes
-    }, [menShopData]);
+    }, [watchShopData]);
     
 
     //Get current product to display
     const indexofLastProduct = currentPage * productsPerPage
     const indexOfFirstProduct = indexofLastProduct - productsPerPage
-    const currentProduct = menShopData.slice(indexOfFirstProduct, indexofLastProduct)
+    const currentProduct = watchShopData.slice(indexOfFirstProduct, indexofLastProduct)
 
     //Pagination logic
     const pageNumbers = []
 
-    const totalProducts = menShopData.length
+    const totalProducts = watchShopData.length
     const productsToShowPerPage = productsPerPage
 
     for(let i = 1; i <= Math.ceil(totalProducts / productsToShowPerPage); i++) {
@@ -98,7 +97,7 @@ const MenFashion = () => {
             <ScrollToTop />
 
             <div className={manfashionstyle.mainContainer}>
-                <h1>Men's Fashion</h1>
+                <h1>Watches</h1>
 
                 <hr />
 
@@ -116,7 +115,7 @@ const MenFashion = () => {
                 </div>
 
                 <div className={manfashionstyle.allProductsContainer}>
-                    {menShopData && menShopData.length > 0 && (
+                    {watchShopData && watchShopData.length > 0 && (
                         currentProduct.map((elem, id) => (
                             <NavLink key={id} to={`/MoreDetails/${elem._id}`}>
                                 <div className={manfashionstyle.productContainer}>
@@ -181,7 +180,6 @@ const MenFashion = () => {
                     )}
                 </div>
 
-
                 <div className={manfashionstyle.paginationWrapper}>
                     <FontAwesomeIcon 
                         icon={faAnglesLeft} 
@@ -211,9 +209,7 @@ const MenFashion = () => {
             
             <Footer />
         </>
-        
-        
     )
 }
 
-export default MenFashion
+export default Watches
