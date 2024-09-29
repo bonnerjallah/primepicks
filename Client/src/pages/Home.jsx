@@ -11,10 +11,14 @@ import { useState } from "react";
 const backEndUrl = import.meta.env.VITE_BACKENDURL
 
 import RandomTwelve from "../components/RandomTwelve";
+import { useCart } from "../components/CartContext";
 import ScrollToTop from "../components/ScrollToTop";
+import MoreDetails from "../components/MoreDetails";
 
 
 const Home = () => {
+
+    // const {cartItems, addToCart, removeFromCart, totalPriceOfQuantity, totalAmount} = useCart()
 
     const [storeData, setStoreData] = useState([])
     const [randomProduct, setRandomProduct] = useState([])
@@ -64,10 +68,12 @@ const Home = () => {
     }, [storeData])
 
 
+
+
     return (
         <div className={homestyle.Container}>
             
-            <ScrollToTop />
+            {/* <ScrollToTop /> */}
 
             <div className={homestyle.heroSection}>
                 <a href="#main">
@@ -129,8 +135,9 @@ const Home = () => {
                 </div>
 
                 <div className={homestyle.randomPorductContainer}>
-                    
-                    <img src={`${backEndUrl}/productimages/${randomProduct.image}`} alt="" width="50%" height="100%" />
+                    <NavLink to={`/MoreDetails/${randomProduct._id}`}>
+                        <img src={`${backEndUrl}/productimages/${randomProduct.image}`} alt="" width="100%" height="100%" />
+                    </NavLink>
 
                     <div className={homestyle.randomProductPriceAndDetails}>
                         <p className={homestyle.productName}> { randomProduct ? randomProduct.title : ""}</p>
@@ -138,12 +145,19 @@ const Home = () => {
                         <p className={homestyle.shippingMethod}><em><strong>Shipping</strong></em> calculated at checkout.</p>
                         <hr />
                         <div className={homestyle.addtoCartWrapper}>
-                            <button>ADD TO CART</button>
-                            <p>More payment options</p>
+                            <NavLink to={`/MoreDetails/${randomProduct._id}`}>
+                                <button>ADD TO CART</button>
+                            </NavLink>
+                            <NavLink to="CheckOut">
+                                <p>More payment options</p>
+                            </NavLink>
                         </div>
 
-                        <p className={homestyle.fullDetailsWrapper}>Full details 
-                            <FontAwesomeIcon icon={faArrowRight} className={homestyle.rightArrowIcon} />
+                        <p className={homestyle.fullDetailsWrapper}>
+                            <NavLink to={`/MoreDetails/${randomProduct._id}`}>
+                                Full details 
+                                <FontAwesomeIcon icon={faArrowRight} className={homestyle.rightArrowIcon} />
+                            </NavLink>
                         </p>
 
                         <div className={homestyle.socialContainer}>

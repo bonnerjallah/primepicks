@@ -14,10 +14,8 @@ import { NavLink } from "react-router-dom"
 
 const MenFashion = () => {
 
-    // const {id} = queryString.parse(location.search)
 
     const [menShopData, setMenShopData] = useState([])
-    const [sortBy, setSortBy] = useState("")
 
     const [currentPage, setCurrentPage] = useState(1)
     const [productsPerPage] = useState(9)
@@ -37,7 +35,6 @@ const MenFashion = () => {
 
                 const menData = formatedData.filter((elem) => elem.category.includes("men's clothing"));
 
-
                 setMenShopData(menData)
 
             } catch (error) {
@@ -47,10 +44,11 @@ const MenFashion = () => {
         fetchData()
     }, [])
 
+    console.log("menshop", menShopData)
+
     //Handle sorting 
     const handleSortBy = (e) => {
         const selectedValue = e.target.value
-        setSortBy(selectedValue)
 
         let sortedData = [...menShopData]
 
@@ -67,8 +65,9 @@ const MenFashion = () => {
         setMenShopData(sortedData); 
     }
 
+    // Reset to first page when data changes
     useEffect(() => {
-        setCurrentPage(1); // Reset to first page when data changes
+        setCurrentPage(1); 
     }, [menShopData]);
     
 
@@ -132,7 +131,7 @@ const MenFashion = () => {
                                         {elem.sale ? (
                                             <div style={{ width: "100%" }}>
                                                 <div style={{ color: "red" }}>
-                                                    {`$ ${(elem.price - (elem.price * elem.salepercentage / 100)).toFixed(2)} 
+                                                    {`$ ${(parseFloat(elem.price.replace(/,/g, "")) - (parseFloat(elem.price.replace(/,/g, "") * elem.salepercentage) / 100)).toLocaleString("en-US", {minimumFractionDigits:2, maximumFractionDigits:2})} 
                                                     (${elem.salepercentage}% off)`}
                                                 </div>
 

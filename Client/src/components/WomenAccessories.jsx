@@ -134,7 +134,7 @@ const WomenAccessories = () => {
                                         {elem.sale ? (
                                             <div style={{ width: "100%" }}>
                                                 <div style={{ color: "red" }}>
-                                                    {`$ ${(elem.price - (elem.price * elem.salepercentage / 100)).toFixed(2)} 
+                                                    {`$ ${(parseFloat(elem.price.replace(/,/g, "")) - (parseFloat(elem.price.replace(/,/g, "")) * elem.salepercentage / 100)).toLocaleString("en-US", {minimumFractionDigits:2, maximumFractionDigits:2})} 
                                                     (${elem.salepercentage}% off)`}
                                                 </div>
 

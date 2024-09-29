@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import axios from "axios"
 
 import randomtwelvestyle from "../styles/randomtwelvestyle.module.css"
+import { NavLink } from "react-router-dom"
 
 const backEndUrl = import.meta.env.VITE_BACKENDURL
 
@@ -60,9 +61,11 @@ const RandomTwelve = () => {
     return (
         <>
             {randomTwelve && (
+                
                 <div className={randomtwelvestyle.mainContainer}>
                     {randomTwelve.map((elem, id) => (
                         <div key={id} >
+                            <NavLink to={`MoreDetails/${elem._id}`}>
                                 <div className={randomtwelvestyle.productContainer}>
                                     <div className={randomtwelvestyle.porductImageWrapper}>
                                         <img src={`${backEndUrl}/productimages/${elem.image}`} alt="product title" width="100%" height="100%" />
@@ -72,6 +75,7 @@ const RandomTwelve = () => {
                                         <div>$ <strong>{elem.price}</strong></div>
                                     </div>
                                 </div>
+                            </NavLink>
                         </div>
                     ))}
                 </div>

@@ -1,21 +1,38 @@
 import { useEffect, useRef, useState } from "react";
+import axios from "axios";
 
-import {Outlet, NavLink} from "react-router-dom"
+import {Outlet, NavLink, useNavigate} from "react-router-dom"
 
 import navbarstyles from "../styles/navbarstyles.module.css"
+import cartstyle from "../styles/cartstyle.module.css"
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faUser, faCartShopping, faMagnifyingGlass, faCaretDown, faGear, faCircleQuestion, faArrowRightFromBracket} from "@fortawesome/free-solid-svg-icons";
+import {faUser, faCartShopping, faMagnifyingGlass, faCaretDown, faGear, faCircleQuestion, faArrowRightFromBracket, faXmark, faMinus, faPlus, faHeart} from "@fortawesome/free-solid-svg-icons";
+
+import { useCart } from "./CartContext";
+
+const backEndUrl = import.meta.env.VITE_BACKENDURL
 
 
 const Navbar = () => {
+
+    const {cartItems, addToCart, removeFromCart, totalPriceOfQuantity, totalAmount} = useCart()
+
+    const navigate = useNavigate()
 
     const profileRef = useRef(null)
     const iconRef = useRef(null)
     const dropDwnRef = useRef(null)
     const closeDropDwnRef = useRef(null)
+    const cartDialogRef = useRef(null)
+
 
     const [showDropDown, setShowDropDown] = useState(false)
     const [showCustomUserDialog, setShowCustomUserDialog] = useState(false)
+
+    const [allProducts, setAllProducts] = useState([])
+    const [filterCartItems, setFilterCartItems] = useState([]);
+    const [count, setCount] = useState(0);
 
     const handleShowDropDwon = () => {
         setShowDropDown(!showDropDown)
@@ -63,14 +80,119 @@ const Navbar = () => {
 
     }, [showCustomUserDialog])
 
+    useEffect(() => {
+        const handleClickOutside = (e) => {
+            if (cartDialogRef.current) {
+                const dialogDimensions = cartDialogRef.current.getBoundingClientRect();
+                if(
+                    e.clientX < dialogDimensions.left ||
+                    e.clientX > dialogDimensions.right ||
+                    e.clientY < dialogDimensions.top ||
+                    e.clientY > dialogDimensions.bottom 
+                ) {
+                    handleCloseDialog()
+                }
+            } else {
+                console.log("cant close")
+            }
+        };
+    
+        document.addEventListener("mousedown", handleClickOutside);
+    
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, []);
+    
+
+    
+    //Fetch filter porduct data and cart items
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get(`${backEndUrl}/getallproducts`,)
+                const data = response.data
+
+                const formatedData = data.map((elem) => ({
+                    ...elem,
+                    price: typeof elem.price === "number" ? elem.price.toLocaleString("en-US", {minimumFractionDigits: 2, maximumFractionDigits: 2}) 
+                    : elem.price
+                }))
+
+                setAllProducts(formatedData)
+
+                const filterItems = data.filter(elem => 
+                    cartItems.some(cartelem => cartelem.id === elem._id)
+                );
+                
+                const formattedCartItemsData = filterItems.map(elem => {
+                    const cartItem = cartItems.find(cartelem => cartelem.id === elem._id);
+                    const quantity = cartItem ? cartItem.quantity : 1;
+
+                    //Ensure the price is a string
+                    const price = typeof elem.price === "string" ? elem.price.replace(/,/g, "") : elem.price
+
+                    const parsedPrice = parseFloat(price) || 0
+
+                    const salePercentage = elem.salePercentage === "" ? 0 : parseInt(elem.salepercentage) || 0;
+                
+                    const discountedPrice = elem.sale === "true" ? parsedPrice - (salePercentage * parsedPrice / 100) : parsedPrice;
+                
+                    return {
+                        ...elem,
+                        quantity,
+                        price: discountedPrice.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+                    };
+                });                
+    
+                setFilterCartItems(formattedCartItemsData);
+                
+            } catch (error) {
+                console.log("Error fetching data", error)
+            }
+        }
+        fetchData()
+    }, [cartItems])
+
+    const handleOpenCart = () => {
+        cartDialogRef.current?.showModal();
+        document.body.style.overflow = "hidden";
+
+        cartDialogRef.current?.addEventListener("close", handleCloseDialog);
+    };
+    
+    const handleCloseDialog = () => {
+        cartDialogRef.current?.close();
+        document.body.style.overflow = ""; 
+    };
+
+    const handleGoToCheckOut = () => {
+        handleCloseDialog()
+        navigate("/CheckOut")
+    }
+
+
+    const handleMinusItemQuantity = (id) => {
+        removeFromCart(id)
+    };
+
+    const handleAddItemFromCart = (id, price, salepercentage, quantity) => {
+        console.log(id, price, salepercentage, quantity )
+        
+            addToCart({id, quantity: quantity, price, salepercentage})
+            console.log("added")
+        
+    }
+
+
 
     return (
         <>
             <nav>
                 <div className={navbarstyles.logoWrapper}>
                     <NavLink to="/">
-                        <img src="/images/logo.png" alt="" width="100%" height="100%" />
-                        <p>PRIME PICKS</p>
+                        <img src="/images/logo.png" alt="" />
+                        {/* <p>PRIME PICKS</p> */}
                     </NavLink>
                 </div>
                 <div className={navbarstyles.linkWrapper}>
@@ -120,12 +242,72 @@ const Navbar = () => {
                         </NavLink>
 
                         <NavLink>
-                            <FontAwesomeIcon icon={faMagnifyingGlass} />
+                            <div className={navbarstyles.cartWrapper}>
+                                <span>0</span>
+                                <FontAwesomeIcon icon={faHeart} />
+                            </div>
                         </NavLink>
 
                         <NavLink>
-                            <FontAwesomeIcon icon={faCartShopping} />
+                            <div className={navbarstyles.cartWrapper}>
+                                <span>{cartItems.length}</span>
+                                <FontAwesomeIcon icon={faCartShopping} onClick={handleOpenCart} />
+                            </div>
                         </NavLink>
+
+                        <dialog  ref={cartDialogRef}>
+                            <div className={cartstyle.dialogHeaderWrapper}>
+                                <h2 className={cartstyle.headerWrapper}>Your cart</h2>
+                                <FontAwesomeIcon icon={faXmark} className={cartstyle.closeButton} onClick={handleCloseDialog}/>
+                            </div>
+
+                            {filterCartItems && filterCartItems.length > 0  && (
+                                <div className={cartstyle.cartContainer}>
+                                    {filterCartItems.map((elem, id) => (
+                                        <div key={id} className={cartstyle.itemWrapper} >
+                                            <div className={cartstyle.cartWrapper}>
+                                                <div className={cartstyle.imageWrapper}>
+                                                    <img src={`${backEndUrl}/productimages/${elem.image}`} alt="" width="100%" height="100%" />
+                                                </div>
+                                                <div className={cartstyle.titleAmoutWrapper}>
+                                                    <div>
+                                                        {elem.title}
+                                                    </div>
+                                                    <div className={cartstyle.quantityWrapper}>
+                                                        <div className={cartstyle.addMinusButtonWrapper}>
+                                                            <FontAwesomeIcon icon={faMinus} onClick={() => handleMinusItemQuantity(elem._id)}/>
+                                                            {elem.quantity}
+                                                            <FontAwesomeIcon icon={faPlus} onClick={() => {handleAddItemFromCart(elem._id, elem.price, elem.salepercentage, elem.quantity)}} />
+                                                        </div>
+
+                                                        <div className={cartstyle.quantityTotalAmoutWrapper}>
+                                                            <strong>
+                                                                $ {(elem.quantity * parseFloat(elem.price.replace(/,/g, ""))).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                                                            </strong>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
+                            <div className={cartstyle.cartFooter}>
+                                <div>
+                                    <p>SUBTOTAL<span><strong style={{color:"white", fontSize: "1.5rem"}}>$ {totalAmount}</strong></span></p>
+                                </div>
+                                <div>
+                                    <p>Taxes and shipping calculated at checkout</p>
+                                    <NavLink to="CheckOut">
+                                        <button onClick={handleGoToCheckOut}>CHECK OUT </button>
+                                    </NavLink>
+                                </div>
+                            </div>
+                            
+
+                        </dialog>
+
+                        
                     </div>
                     
                 </div>

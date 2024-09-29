@@ -1,0 +1,162 @@
+dialog {
+    width: 40%; /* Ensure dialog has the same width as .mainContainer */
+    height: 95dvh;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 999;
+    animation: slideModule 800ms ease-in-out forwards;
+    padding: 0; 
+    border: none; 
+    
+}
+
+dialog::backdrop {
+    background-color: rgba(30, 156, 190, 0.6); 
+}
+
+.mainContainer {
+    height: 100%; 
+    width: 100%; 
+    overflow-y: auto; 
+    padding: 1rem; 
+}
+
+@keyframes slideModule {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.dialogHeaderWrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 15%;
+    padding: .5rem;
+    background-color: rgba(30, 156, 190); 
+    position: sticky;
+    top: 0;
+}
+
+.closeButtonWrapper {
+    font-size: 2rem;
+    text-align: right;
+    padding-right: .5rem;
+}
+
+.closeButton {
+    cursor: pointer;
+    background-color: red;
+    height: 100%;
+    width: 10%;
+    color: white;
+    border-radius: 1rem;
+}
+
+.closeButton:hover {
+    color: black;
+}
+
+.cartContainer {
+    display: flex;
+    flex-direction: column;
+    row-gap: 2rem;
+    padding: .5rem;
+    height: 60%;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+}
+
+.headerWrapper {
+    text-align: center;
+    text-decoration: underline;
+}
+
+.cartWrapper {
+    display: flex;
+    width: 100%;
+    column-gap: 2rem;
+}
+
+.imageWrapper {
+    width: 15%;
+}
+
+.titleAmoutWrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 70%;
+    padding: .5rem 0;
+}
+
+.quantityWrapper{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.addMinusButtonWrapper{
+    width: 30%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.addMinusButtonWrapper > *:hover{
+    cursor: pointer;
+    background-color: black;
+    color: white;
+    border-radius: 5px;
+}
+
+.quantityTotalAmoutWrapper{
+    width: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.itemWrapper{
+    border-bottom: 1px solid black;
+    padding-bottom: .5rem;
+}
+
+.cartFooter{
+    background-color: rgba(30, 156, 190); 
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 20%;
+    display: grid;
+    grid-template-rows: 30% 1fr; 
+    padding: .5rem;
+}
+
+.cartFooter > :first-child p{
+    display: flex;
+    justify-content: space-between;
+}
+
+.cartFooter > :last-child{
+    height: 100%;
+    display: grid;
+    grid-template-rows: 30% 1fr;
+    row-gap: .5rem;
+}
+
+.cartFooter > :last-child a button{
+    width: 100%;
+    height: 100%;
+    background-color:#326ea7 ;
+    border: none;
+    cursor: pointer;
+    color: white;
+
+}
+
+.cartFooter > :last-child a button:hover{
+    background-color: #7eabd8;
+    color: black;
+    border-radius: 5px;
+}

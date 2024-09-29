@@ -1,5 +1,7 @@
 import {createBrowserRouter, createRoutesFromElements, Route, RouterProvider} from "react-router-dom"
 
+import { CartProvider } from "./components/Cartcontext"
+
 import Home from "./pages/Home"
 import Navbar from "./components/Navbar"
 import MenFashion from "./components/MenFashion"
@@ -9,6 +11,8 @@ import WomenAccessories from "./components/WomenAccessories"
 import Watches from "./components/Watches"
 import MenAccessories from "./components/MenAccessories"
 import MoreDetails from "./components/MoreDetails"
+import CheckOut from "./pages/CheckOut"
+
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -21,6 +25,7 @@ const router = createBrowserRouter(
       <Route path="/Watches" element={<Watches/>} />
       <Route path="/MenAccessories" element={<MenAccessories/>} />
       <Route path="/MoreDetails/:id" element={<MoreDetails/>} />
+      <Route path="/CheckOut" element={<CheckOut />} />
 
     </Route>
   )
@@ -29,9 +34,9 @@ const router = createBrowserRouter(
 
 const App = () => {
   return (
-    <>
+    <CartProvider>
       <RouterProvider router={router} />
-    </>
+    </CartProvider>
   )
 }
 

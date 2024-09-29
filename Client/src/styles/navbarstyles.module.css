@@ -11,7 +11,7 @@ nav{
     padding-left: 10rem;
     padding-right: 10rem;
     padding-bottom: .5rem;
-    height: max-content;
+    height: 3rem;
     width: 100%;
     background-color: black;
     z-index: 99;
@@ -19,27 +19,24 @@ nav{
 }
 
 .logoWrapper{
-    width: 7%;
+    width: 40%;
+    height: 100%;
     cursor: pointer;
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    align-items: flex-end;
+    position: relative;
 }
 
-.logoWrapper a p{
-    width: max-content;
-    margin-top: -1rem;
-    color:#066782;
-}
 
 .logoWrapper a{
     text-decoration: none;
 }
 
 .logoWrapper a img{
-    border: 2px solid black;
-    width: 80%;
-    height: 80%;
+    width: 15%;
+    height: 100%;
+    position: absolute;
+    top: .5rem;
 }
 
 .linkWrapper{
@@ -167,3 +164,21 @@ nav ul li:hover{
 .iconsAndPicWrapper div:hover{
     color: white;
 }
+
+.cartWrapper{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.cartWrapper span{
+    position: absolute;
+    right: 0;
+    top: -1.2rem;
+    color: wheat;
+}
+
+.scroll-lock {
+    overflow: hidden;
+}
+

@@ -128,6 +128,20 @@ hr{
     margin: 3rem 3rem;
 }
 
+.randomPorductContainer a{
+    overflow: hidden;
+}
+
+.randomPorductContainer a img{
+    transition: all 400ms ease-in-out;
+}
+
+.randomPorductContainer a img:hover{
+    border: 1px solid black;
+    transition: all 400ms ease-in-out;
+    scale: 1.2;
+}
+
 .randomProductPriceAndDetails{
     width: 50%;
     display: flex;
@@ -166,7 +180,15 @@ hr{
     margin-bottom: 1rem;
 }
 
-.addtoCartWrapper button{
+.addtoCartWrapper a {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+}
+
+.addtoCartWrapper a button{
     width: 7rem;
     height: 100%;
     border-radius: 5px;
@@ -178,7 +200,7 @@ hr{
     align-self: center;
 }
 
-.addtoCartWrapper button::before{
+.addtoCartWrapper a button::before{
     content: "";
     position: absolute;
     top: 0;
@@ -188,8 +210,8 @@ hr{
     border: var(--border-size) solid rgb(30, 156, 190);
 }
 
-.addtoCartWrapper button:hover::before,
-.addtoCartWrapper button:hover::before{
+.addtoCartWrapper a button:hover::before,
+.addtoCartWrapper a button:hover::before{
     top: calc(var(--border-size) * -2);
     left: calc(2px * -2);
     right: calc(2px * -2);
@@ -197,30 +219,36 @@ hr{
     border-radius: 5px;
 }
 
-.addtoCartWrapper :nth-child(2) {
+.addtoCartWrapper :nth-child(2){
+    color: black;
+}
+
+.addtoCartWrapper :nth-child(2):hover {
     text-decoration: underline;
     cursor: pointer;
 }
 
-.fullDetailsWrapper {
+.fullDetailsWrapper a {
     margin-top: 1rem;
     display: flex;
-    column-gap: .5rem;
+    column-gap: .2rem;
     align-items: center;
     margin-bottom: 1rem;
     cursor: pointer;
+    text-decoration: none;
+    color: black;
+    width: 110%;
 }
 
-.fullDetailsWrapper:hover {
-    text-decoration: underline;
+.fullDetailsWrapper a:hover {
     color: rgb(30, 156, 190);
 }
 
 .rightArrowIcon {
-    transition: transform 800ms ease-in-out;
+    transition: transform 400ms ease-in-out;
 } 
 
-.fullDetailsWrapper:hover .rightArrowIcon {
+.fullDetailsWrapper a:hover .rightArrowIcon {
     transform: translateX(0.5rem); 
 }
 

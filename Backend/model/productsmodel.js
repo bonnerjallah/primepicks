@@ -29,11 +29,11 @@ const ProductsSchema = new mongoose.Schema({
 
     rating: {
         rate: {
-            type: String,
+            type: Number,
             required: true
         },
         count: {
-            type: String,
+            type: Number,
             required: true
         }
     },
@@ -43,7 +43,7 @@ const ProductsSchema = new mongoose.Schema({
     },
 
     salepercentage:{
-        type: String
+        type: Number
     }
 
 }, {collection: "products"})
