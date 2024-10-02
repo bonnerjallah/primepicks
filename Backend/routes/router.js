@@ -5,6 +5,7 @@ const path = require("path")
 
 const {addNewProduct} = require("./posts")
 const {getAllProducts} = require("./gets")
+const {register, login, validateAccessToken, refreshToken, getMember, logOut} = require("../controllers/controller")
 
 
 const router = express.Router();
@@ -41,10 +42,19 @@ const upload = multer({
 })
 
 
-
 router.post("/addproduct", upload.single("image"), addNewProduct)
 
 router.get("/getallproducts", getAllProducts)
+
+router.post("/register", register)
+
+router.post("/loginmember", login)
+
+router.post("/refresh_token", refreshToken)
+
+router.post("/getmember", getMember, validateAccessToken)
+
+router.post("/logout", logOut)
 
 
 module.exports = router;

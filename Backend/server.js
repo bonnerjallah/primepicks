@@ -3,6 +3,7 @@ const cors = require("cors")
 
 const connectDB = require("./config/db")
 const router = require("./routes/router")
+const cookieParser = require("cookie-parser")
 
 const frontEndUrl = process.env.VITE_FRONTEND_URL
 const PORT = process.env.VITE_PORT || 3001
@@ -12,6 +13,7 @@ const app = express()
 
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
+app.use(cookieParser())
 
 app.use(cors({
     origin: `${frontEndUrl}`,

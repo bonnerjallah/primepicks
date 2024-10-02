@@ -151,6 +151,11 @@ nav ul li:hover{
     animation: slide 800ms ease-in-out forwards;
 }
 
+.customDialog a {
+    text-decoration: none;
+    color: black;
+}
+
 .iconsAndPicWrapper{
     display: flex;
     flex-direction: column;

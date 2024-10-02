@@ -12,6 +12,7 @@ import Watches from "./components/Watches"
 import MenAccessories from "./components/MenAccessories"
 import MoreDetails from "./components/MoreDetails"
 import CheckOut from "./pages/CheckOut"
+import Login from "./pages/Login"
 
 
 const router = createBrowserRouter(
@@ -26,6 +27,7 @@ const router = createBrowserRouter(
       <Route path="/MenAccessories" element={<MenAccessories/>} />
       <Route path="/MoreDetails/:id" element={<MoreDetails/>} />
       <Route path="/CheckOut" element={<CheckOut />} />
+      <Route path="/Login" element={<Login />} />
 
     </Route>
   )

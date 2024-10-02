@@ -32,7 +32,7 @@ const Navbar = () => {
 
     const [allProducts, setAllProducts] = useState([])
     const [filterCartItems, setFilterCartItems] = useState([]);
-    const [count, setCount] = useState(0);
+    const [isloggedIn, setIsLoggedIn] = useState(false)
 
     const handleShowDropDwon = () => {
         setShowDropDown(!showDropDown)
@@ -207,13 +207,12 @@ const Navbar = () => {
                             </div>
                             <ul className={`${navbarstyles.dropDownContainer} ${showDropDown ? navbarstyles.showDropDownContainer : ""}`} ref={dropDwnRef} >
                                 <NavLink><li>All Products</li></NavLink>
-                                <NavLink><li>Accessories</li></NavLink>
-                                <NavLink><li>Apparels</li></NavLink>
-                                <NavLink><li>Beatuy</li></NavLink>
-                                <NavLink><li>Men Fashions</li></NavLink>
-                                <NavLink><li>Women Fashions</li></NavLink>
-                                <NavLink><li>Shoes</li></NavLink>
-                                <NavLink><li>Bags</li></NavLink>
+                                <NavLink to="/MenFashion"><li>Men Fashions</li></NavLink>
+                                <NavLink to="/WomenFashion"><li>Women Fashions</li></NavLink>
+                                <NavLink to='/MenAccessories'><li>Men Accessories</li></NavLink>
+                                <NavLink to="/WomenAccessories"><li> Women Accessories</li></NavLink>
+                                <NavLink to='/Watches'><li>Watches</li></NavLink>
+                                <NavLink to="/Shoes"><li>Shoes</li></NavLink>
                             </ul>
                         </li>
 
@@ -230,13 +229,23 @@ const Navbar = () => {
                             <FontAwesomeIcon icon={faUser} onClick={handleShowCustomDialog} ref={iconRef} />
                             {showCustomUserDialog && (
                                 <div className={navbarstyles.customDialog} ref={profileRef}>
-                                    <h2>John Smith</h2>
-                                    <div className={navbarstyles.iconsAndPicWrapper} >
-                                        <div><FontAwesomeIcon icon={faUser} /> My Profile</div>
-                                        <div><FontAwesomeIcon icon={faGear} /> Account Setting</div>
-                                        <div><FontAwesomeIcon icon={faCircleQuestion} /> Need Help?</div>
-                                        <div><FontAwesomeIcon icon={faArrowRightFromBracket} /> Sign Out</div>
-                                    </div>
+
+                                    {isloggedIn ? (
+                                        <div>
+                                            <h2>John Smith</h2>
+                                            <div className={navbarstyles.iconsAndPicWrapper} >
+                                                <div><FontAwesomeIcon icon={faUser} /> My Profile</div>
+                                                <div><FontAwesomeIcon icon={faGear} /> Account Setting</div>
+                                                <div><FontAwesomeIcon icon={faCircleQuestion} /> Need Help?</div>
+                                                <div><FontAwesomeIcon icon={faArrowRightFromBracket} /> Sign Out</div>
+                                            </div>
+                                        </div>
+                                    ) : (
+                                        <NavLink to="/Login">
+                                            <p>Log In</p>
+                                        </NavLink>
+                                    )}
+                                    
                                 </div>
                             )}
                         </NavLink>

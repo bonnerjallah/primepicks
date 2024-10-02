@@ -1,0 +1,74 @@
+.mainContainer {
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.mainContainer a {
+    text-decoration: none;
+    color: black;
+    margin-top: 1rem;
+    padding: .2rem;
+}
+
+.mainContainer a:hover{
+    background-color: rgb(169, 208, 241);
+    border: 5px;
+    border-radius: .1rem;
+    color: white;
+}
+
+.mainContainer form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 1rem; 
+    margin-top: 1rem;
+    height: max-content;
+}
+
+.mainContainer form input{
+    width: 20rem;
+    height: 2rem;
+}
+
+.mainContainer form button{
+    background-color: rgba(30, 156, 190);
+    width: 40%;
+    height: 2rem;
+    border: none;
+    cursor: pointer;
+}
+
+.mainContainer form button:hover{
+    background-color: rgba(30, 156, 190);
+    color: white;
+    border-radius: 5px;
+}
+
+.linksWrapper{
+    height: 20%;
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 1rem;
+}
+
+.linksWrapper a{
+    text-decoration: none;
+}
+
+.linksWrapper > * {
+    cursor: pointer;
+    color: black;
+    padding: .1rem
+}
+
+.linksWrapper > *:hover{
+    background-color: rgb(169, 208, 241);
+    color: white;
+    border-radius: 5px;
+}
