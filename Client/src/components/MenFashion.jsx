@@ -44,7 +44,6 @@ const MenFashion = () => {
         fetchData()
     }, [])
 
-    console.log("menshop", menShopData)
 
     //Handle sorting 
     const handleSortBy = (e) => {

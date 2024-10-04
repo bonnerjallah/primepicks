@@ -34,6 +34,7 @@ const stateAbbreviations = [
 const CheckOut = () => {
 
     const {cartItems, totalAmount} = useCart([])
+    
     const [grandTotalAmount, setGrandTotalAmount] = useState(0);
     const [filterCartItems, setFilterCartItems] = useState([]);
     const [shippingMethod, setShippingMethod] = useState('')
@@ -177,10 +178,10 @@ const CheckOut = () => {
                             <div>
                                 <label htmlFor="Economy">
                                     <input type="radio" name="shippingMethod" id="Economy" value="Free" onChange={handleShippingMethod} />
-                                    <p>
+                                    <span>
                                         Economy
                                         <small>5 to 8 business days</small>
-                                    </p>
+                                    </span>
                                 </label>
                                 <strong>Free</strong>
                             </div>
@@ -188,10 +189,10 @@ const CheckOut = () => {
                             <div>
                                 <label htmlFor="USPS">
                                     <input type="radio" name="shippingMethod" id="USPS" value="8.44" onChange={handleShippingMethod} />
-                                    <p>
+                                    <span>
                                         USPS Ground Advantage
                                         <small>5 business days</small>
-                                    </p>
+                                    </span>
                                 </label>
                                 <strong>$ 8.44</strong>
                             </div>
@@ -199,10 +200,10 @@ const CheckOut = () => {
                             <div>
                                 <label htmlFor="UPS">
                                     <input type="radio" name="shippingMethod" id="UPS" value="47.25" onChange={handleShippingMethod} />
-                                    <p>
+                                    <span>
                                         UPS Priority Mail
                                         <small>1 business day</small>
-                                    </p>
+                                    </span>
                                 </label>
                                 <strong>$ 47.25</strong>
                             </div>
@@ -232,7 +233,7 @@ const CheckOut = () => {
                             
                             <label htmlFor="SameAddress">
                                 <input type="checkBox" name="sameaddress" id="SameAddress" />
-                                <p>Use shipping address as billing address</p>
+                                <span>Use shipping address as billing address</span>
                             </label>
 
                             <div className={checkoutstyle.billingWrapper}>
@@ -316,15 +317,10 @@ const CheckOut = () => {
                             </div>
                             <div>
                                 <p>Shipping</p>
-                                <p>{shippingMethod ? (
-                                    <p> 
-                                        {shippingMethod}
-                                    </p>
-                                ) : (
-                                    <p>Free</p>
-                                )}</p>
+                                <span>{shippingMethod ? shippingMethod : "Free"}</span>
                             </div>
                         </div>
+
 
                         <div className={checkoutstyle.shippingAndTotalWrapper}>
                             <div style={{fontSize:"1.5rem"}}>

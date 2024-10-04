@@ -1,8 +1,9 @@
 import { useState } from "react"
 import axios from "axios"
-import Cookie from "js-cookie"
+import {useAuth} from "../components/AuthContext"
 
 import Footer from "../components/Footer"
+import ScrollToTop from "../components/ScrollToTop"
 
 import loginstyle from "../styles/loginstyle.module.css"
 import { NavLink, useNavigate} from 'react-router-dom'
@@ -13,6 +14,7 @@ const backEndUrl = import.meta.env.VITE_BACKENDURL
 const Login = () => {
 
     const navigate = useNavigate()
+    const {login} = useAuth()
 
     const [showSignUp, setShowSignUp] = useState(false)
     const [signUpData, setSignUpData] = useState({
@@ -74,18 +76,17 @@ const Login = () => {
             })
 
             if(response.status === 200) {
-                
-                const token = Cookie.get("token")
 
                 const {userData} = response.data;
 
-                // login(userData, token)
+                login(userData)
 
                 setLoginData({
                     email: "",
                     pwd: ""
                 })
 
+                navigate(-1)
             }
 
         } catch (error) {
@@ -99,17 +100,13 @@ const Login = () => {
         }
     }
 
-    console.log(errorMsg)
-
-
-
-
 
 
 
     return (
 
         <>
+            <ScrollToTop />
             {showSignUp ? (
                 <div className={loginstyle.mainContainer}>
 

@@ -12,6 +12,7 @@ import { faStar, faStarHalf, faArrowRight, faPlus, faMinus,faXmark} from "@forta
 import Footer from './Footer';
 import ScrollToTop from './ScrollToTop';
 import { useCart } from './CartContext';
+import { useAuth } from './AuthContext';
 
 
 const backEndUrl = import.meta.env.VITE_BACKENDURL
@@ -21,7 +22,8 @@ const MoreDetails = () => {
 
     const cartDialogRef = useRef(null)
 
-    const {cartItems, addToCart, removeFromCart, totalPriceOfQuantity, totalAmount} = useCart()
+    const {cartItems, addToCart, removeFromCart, addToWishList, totalAmount} = useCart()
+    const {loggedIn} = useAuth()
 
     const { id } = useParams();
     const navigate = useNavigate();
@@ -86,7 +88,6 @@ const MoreDetails = () => {
     }, [id, cartItems])
 
 
-
     // Suggest related products
     useEffect(() => {
         const suggestedProducts = () => {
@@ -101,9 +102,11 @@ const MoreDetails = () => {
         suggestedProducts();
     }, [allProducts, filterProduct]);
 
+
     const handleIntrestProductDetails = (_id) => {
         navigate(`/MoreDetails/${_id}`);
     };
+
 
     const handleMinusItemQuantity = (id) => {
         if (count > 0) {
@@ -111,6 +114,7 @@ const MoreDetails = () => {
             removeFromCart(id)
         }
     };
+
 
     useEffect(() => {
         const getQuantity = () => {
@@ -121,9 +125,11 @@ const MoreDetails = () => {
         getQuantity()
     }, [cartItems, filterProduct])
 
+
     const handleAddItemQuantity = () => {
         setCount(count + 1); 
     };
+
 
     const handleAddToCart = (id, price, salepercentage) => {
         if (count >= 1) {
@@ -136,17 +142,28 @@ const MoreDetails = () => {
         }
     };
 
-    const handleAddItemFromCart = (id, price, salepercentage) => {
-        if(count >= 1) {
-            addToCart({id, quantity: count, price, salepercentage})
-        } 
-    }
 
     const handleCloseDialog = () => {
         cartDialogRef.current?.close()
         document.body.style.overflow = ""
-    }
-    
+    };
+
+
+    const handleAddItemFromCart = (id, price, salepercentage) => {
+        if(count >= 1) {
+            addToCart({id, quantity: count, price, salepercentage})
+        } 
+    };
+
+
+    const handleWishItem = (id) => {
+        if(loggedIn) {
+            addToWishList({id})
+        } else {
+            navigate("/Login")
+        }
+    };
+
 
    // Close modal when clicking outside
     useEffect(() => {
@@ -220,7 +237,7 @@ const MoreDetails = () => {
                             
                             <button onClick={() => {handleAddToCart(filterProduct._id, filterProduct.price, filterProduct.salepercentage);}}>ADD TO CART</button>
 
-                            <button>ADD TO WISH LIST</button>
+                            <button onClick={() => handleWishItem(filterProduct._id)}>ADD TO WISH LIST</button>
                         </div>
                         <NavLink to={`/CheckOut?id=${filterProduct._id}`}>
                             <p>More payment options</p>

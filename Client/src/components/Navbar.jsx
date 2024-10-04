@@ -10,15 +10,19 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faUser, faCartShopping, faMagnifyingGlass, faCaretDown, faGear, faCircleQuestion, faArrowRightFromBracket, faXmark, faMinus, faPlus, faHeart} from "@fortawesome/free-solid-svg-icons";
 
 import { useCart } from "./CartContext";
+import { useAuth } from "./AuthContext";
 
 const backEndUrl = import.meta.env.VITE_BACKENDURL
 
 
 const Navbar = () => {
 
-    const {cartItems, addToCart, removeFromCart, totalPriceOfQuantity, totalAmount} = useCart()
+    const {cartItems, addToCart, removeFromCart, wishListItems, totalAmount} = useCart()
 
     const navigate = useNavigate()
+
+    const {logOut, loggedIn, user} = useAuth()
+    
 
     const profileRef = useRef(null)
     const iconRef = useRef(null)
@@ -32,7 +36,10 @@ const Navbar = () => {
 
     const [allProducts, setAllProducts] = useState([])
     const [filterCartItems, setFilterCartItems] = useState([]);
-    const [isloggedIn, setIsLoggedIn] = useState(false)
+
+    const [member, setMember] = useState("")
+
+    
 
     const handleShowDropDwon = () => {
         setShowDropDown(!showDropDown)
@@ -105,7 +112,41 @@ const Navbar = () => {
     }, []);
     
 
+    axios.defaults.withCredentials = true
+    useEffect(() => {
+        const fetchUserData = async () => {
+            if (!user) return;     
+            try {
+                const response = await axios.get(`${backEndUrl}/getmember`);
     
+                response.data.valid ? setMember(response.data) : console.error("Invalid user", response.data);
+            } catch (error) {
+                console.log("Error fetching user data", error);
+            }
+        };
+    
+        fetchUserData();
+    }, [user]);
+
+    const handleLogOut = async () => {
+        try {
+            const response = await axios.post(`${backEndUrl}/logout`, {}, {
+                withCredentials: true
+            })
+
+            if(response.status === 200) {
+                console.log("response data", response.data)
+            }
+            
+        } catch (error) {
+            console.log("Error loging out user", error)
+        }
+
+        logOut()
+        
+        navigate("/")
+    }
+
     //Fetch filter porduct data and cart items
     useEffect(() => {
         const fetchData = async () => {
@@ -171,7 +212,6 @@ const Navbar = () => {
         navigate("/CheckOut")
     }
 
-
     const handleMinusItemQuantity = (id) => {
         removeFromCart(id)
     };
@@ -206,7 +246,6 @@ const Navbar = () => {
                                 <p onClick={handleShowDropDwon} ref={closeDropDwnRef}>SHOP <span><FontAwesomeIcon icon={faCaretDown} /></span></p>
                             </div>
                             <ul className={`${navbarstyles.dropDownContainer} ${showDropDown ? navbarstyles.showDropDownContainer : ""}`} ref={dropDwnRef} >
-                                <NavLink><li>All Products</li></NavLink>
                                 <NavLink to="/MenFashion"><li>Men Fashions</li></NavLink>
                                 <NavLink to="/WomenFashion"><li>Women Fashions</li></NavLink>
                                 <NavLink to='/MenAccessories'><li>Men Accessories</li></NavLink>
@@ -225,41 +264,46 @@ const Navbar = () => {
                         </NavLink>
                     </ul>
                     <div className={navbarstyles.iconWrapper}>
-                        <NavLink>
-                            <FontAwesomeIcon icon={faUser} onClick={handleShowCustomDialog} ref={iconRef} />
+                        <div>
+                            <FontAwesomeIcon icon={faUser} onClick={handleShowCustomDialog} ref={iconRef} className={navbarstyles.userIcon} />
                             {showCustomUserDialog && (
                                 <div className={navbarstyles.customDialog} ref={profileRef}>
 
-                                    {isloggedIn ? (
-                                        <div>
-                                            <h2>John Smith</h2>
+                                    {loggedIn ? (
+                                        <div className={navbarstyles.signOutWrapper}>
+                                            {member && member.user && member.user.firstname && (
+                                                <h2>{member.user.firstname}</h2>
+                                            )}
                                             <div className={navbarstyles.iconsAndPicWrapper} >
                                                 <div><FontAwesomeIcon icon={faUser} /> My Profile</div>
                                                 <div><FontAwesomeIcon icon={faGear} /> Account Setting</div>
                                                 <div><FontAwesomeIcon icon={faCircleQuestion} /> Need Help?</div>
-                                                <div><FontAwesomeIcon icon={faArrowRightFromBracket} /> Sign Out</div>
+                                                <div onClick={handleLogOut}><FontAwesomeIcon icon={faArrowRightFromBracket} /> Sign Out</div>
                                             </div>
                                         </div>
                                     ) : (
-                                        <NavLink to="/Login">
-                                            <p>Log In</p>
-                                        </NavLink>
+                                        <div className={navbarstyles.loginWrapper}>
+                                            <NavLink to="/Login">
+                                                <p>Log In</p>
+                                            </NavLink>
+                                        </div>
+                                        
                                     )}
                                     
                                 </div>
                             )}
-                        </NavLink>
+                        </div>
 
-                        <NavLink>
+                        <NavLink to="/WishList">
                             <div className={navbarstyles.cartWrapper}>
-                                <span>0</span>
+                                <span>{wishListItems.length === 0 ? "" : wishListItems.length}</span>
                                 <FontAwesomeIcon icon={faHeart} />
                             </div>
                         </NavLink>
 
                         <NavLink>
                             <div className={navbarstyles.cartWrapper}>
-                                <span>{cartItems.length}</span>
+                                <span>{cartItems.length === 0 ? "" : cartItems.length}</span>
                                 <FontAwesomeIcon icon={faCartShopping} onClick={handleOpenCart} />
                             </div>
                         </NavLink>

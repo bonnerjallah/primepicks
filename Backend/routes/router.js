@@ -42,18 +42,14 @@ const upload = multer({
 })
 
 
-router.post("/addproduct", upload.single("image"), addNewProduct)
-
 router.get("/getallproducts", getAllProducts)
+router.get("/getmember", validateAccessToken, getMember)
 
+
+router.post("/addproduct", upload.single("image"), addNewProduct)
 router.post("/register", register)
-
 router.post("/loginmember", login)
-
 router.post("/refresh_token", refreshToken)
-
-router.post("/getmember", getMember, validateAccessToken)
-
 router.post("/logout", logOut)
 
 

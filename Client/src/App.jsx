@@ -13,6 +13,8 @@ import MenAccessories from "./components/MenAccessories"
 import MoreDetails from "./components/MoreDetails"
 import CheckOut from "./pages/CheckOut"
 import Login from "./pages/Login"
+import WishList from "./components/WishList"
+import ProtectedRoutes from "./components/ProtectedRoutes"
 
 
 const router = createBrowserRouter(
@@ -28,6 +30,9 @@ const router = createBrowserRouter(
       <Route path="/MoreDetails/:id" element={<MoreDetails/>} />
       <Route path="/CheckOut" element={<CheckOut />} />
       <Route path="/Login" element={<Login />} />
+      <Route element={<ProtectedRoutes />}>
+        <Route path="/WishList" element={<WishList />} />
+      </Route>
 
     </Route>
   )

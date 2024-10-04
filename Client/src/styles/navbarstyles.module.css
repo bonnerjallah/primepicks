@@ -138,14 +138,9 @@ nav ul li:hover{
     height: max-content;
     color: black;
     padding: 1rem;
-    display: flex;
-    flex-direction: column;
-    row-gap: 1rem;
     position: absolute;
-    margin-top: 2rem;
     background-color: rgb(30, 156, 190);
     left: -2rem;
-    top: 1.5rem;
     border-radius: 5px;
     z-index: 2;
     animation: slide 800ms ease-in-out forwards;
@@ -153,7 +148,13 @@ nav ul li:hover{
 
 .customDialog a {
     text-decoration: none;
-    color: black;
+    color: rgb(0, 0, 0);
+}
+
+.signOutWrapper{
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
 }
 
 .iconsAndPicWrapper{
@@ -162,12 +163,28 @@ nav ul li:hover{
     row-gap: .5rem;
 }
 
+
+.userIcon{
+    color: rgb(30, 156, 190);
+    cursor: pointer;
+}
+
+.userIcon:hover{
+    color: white;
+}
+
+.iconWrapper{
+    position: relative;
+}
+
+
 .iconWrapper a{
     position: relative;
 }
 
 .iconsAndPicWrapper div:hover{
     color: white;
+    cursor: pointer;
 }
 
 .cartWrapper{

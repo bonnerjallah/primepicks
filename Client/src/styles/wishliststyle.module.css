@@ -1,0 +1,102 @@
+.mainContainer{
+    height: 100dvh;
+    padding-top: 4rem;
+    padding-left: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.itemsContainer{
+    border: 1px solid rgb(10, 10, 10);
+    height: 92%;
+    width: 50%;
+    padding: 1rem;
+    overflow: scroll;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+}
+
+.itemWrapper{
+    display: flex;
+    border-bottom: 2px solid black;
+    justify-content: space-between;
+    align-items: center;
+    padding: .5rem;
+}
+
+.imageWrapper{
+    display: flex;
+    column-gap: .5rem;
+}
+
+.imageWrapper > div{
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+}
+
+.buttnWrapper{
+    display: flex;
+    flex-direction: column;
+    row-gap: .5rem;
+}
+
+.buttnWrapper > :first-child{
+    height: 2rem;
+    background-color: #7eabd8;
+    border: none;
+    padding: .5rem;
+    cursor: pointer;
+    color: white;
+}
+
+.buttnWrapper :first-child:hover{
+    background-color: rgb(60, 143, 60);
+    border-radius: 5px;
+    color: black;
+}
+
+.buttnWrapper > :last-child{
+    height: 2rem;
+    background-color: rgb(158, 59, 59);
+    border: none;
+    padding: .5rem;
+    cursor: pointer;
+    color: white;
+}
+
+.buttnWrapper :last-child:hover{
+    background-color: red;
+    border-radius: 5px;
+    color: black;
+}
+
+.noItemsWrapper{
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+    align-items: center;
+}
+
+.continueShopping div{
+    color: green;
+    text-decoration: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: .5rem;
+}
+
+.arrowIcon{
+    transition: transform 400ms ease-in-out;
+}
+
+.continueShopping:hover .arrowIcon{
+    transform: translateX(0.5rem);
+}
+

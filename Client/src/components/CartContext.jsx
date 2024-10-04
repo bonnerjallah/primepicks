@@ -5,10 +5,17 @@ const CartContext = createContext();
 export const useCart = () => useContext(CartContext);
 
 export const CartProvider = ({ children }) => {
+
     const [cartItems, setCartItems] = useState(() => {
         const savedCart = localStorage.getItem("cartItems");
         return savedCart ? JSON.parse(savedCart) : [];
     });
+    
+    const [wishListItems, setWishListItems] = useState(() => {
+        const savedWishList = localStorage.getItem("wishListItems");
+        return savedWishList ? JSON.parse(savedWishList) : [];
+    });
+
 
     useEffect(() => {
         localStorage.setItem("cartItems", JSON.stringify(cartItems));
@@ -20,10 +27,7 @@ export const CartProvider = ({ children }) => {
             const existingItem = prevItems.find(cartItem => cartItem.id === item.id);
             if (existingItem) {
                 return prevItems.map(cartItem => {
-                    return cartItem.id === item.id
-                        ? { ...cartItem, quantity: cartItem.quantity + 1 }
-                        : cartItem;
-                });
+                    return cartItem.id === item.id ? { ...cartItem, quantity: cartItem.quantity + 1 } : cartItem });
             } else {
                 return [...prevItems, item];
             }
@@ -45,29 +49,36 @@ export const CartProvider = ({ children }) => {
         })
     }
 
+    useEffect(() => {
+        if (wishListItems.length > 0) {
+            localStorage.setItem("wishListItems", JSON.stringify(wishListItems));
+        }
+    }, [wishListItems]);
+
+    const addToWishList = (item) => {
+        setWishListItems((prevItems) => {
+            const existingItem = prevItems.find(wishItem => wishItem.id === item.id);
+            if (!existingItem) {
+                return [...prevItems, item];
+            }
+            return prevItems; 
+        });
+    }
+
+    const removeFromWishList = (id) => {
+        setWishListItems((prevItems) => {
+            const updatedItems = prevItems.filter(elem => elem.id !== id); 
+    
+            localStorage.setItem("wishListItems", JSON.stringify(updatedItems));
+    
+            return updatedItems;
+        });
+    };
+
+
     const totalItems = useMemo(() => {
         return cartItems.reduce((sum, item) => sum + item.quantity, 0)
     }, [cartItems])
-
-    const totalPriceOfQuantity = useMemo(() => {
-        const quantityAmount = cartItems.reduce((acc, elem) => {
-            const price = typeof elem.price === "string" ? elem.price.replace(/,/g, "") : elem.price;
-            const parsedPrice = parseFloat(price) || 0;
-
-            const discountedPrice = parsedPrice - (elem.salepercentage * parsedPrice / 100);
-
-            if (elem.quantity > 1) {
-                const quantity = elem.quantity ? parseInt(elem.quantity, 10) : 1;
-                const totalQuantityAmount = discountedPrice * quantity;
-
-                return {  totalQuantityAmount };
-            }
-            return acc; 
-        }, {});
-
-        return quantityAmount; 
-    }, [cartItems]);    
-
 
 
     const totalAmount = useMemo(() => {
@@ -88,15 +99,13 @@ export const CartProvider = ({ children }) => {
     
         return amount.toLocaleString("en-US", {minimumFractionDigits:2, maximumFractionDigits:2});
     }, [cartItems]);
-    
-    
-
-
 
 
     return (
-        <CartContext.Provider value={{ cartItems, addToCart, removeFromCart, totalItems, totalPriceOfQuantity, totalAmount }}>
+        <CartContext.Provider value={{ cartItems, addToCart, wishListItems, addToWishList, removeFromWishList, removeFromCart, totalItems, totalAmount }}>
+
             {children}
+            
         </CartContext.Provider>
     );
 };
