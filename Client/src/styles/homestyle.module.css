@@ -8,6 +8,7 @@
     background-position: center;
     background-size: cover;
     height: 40rem;
+    position: relative;
 }
 
 .heroSection button{
@@ -20,6 +21,7 @@
     border: none;
     font-size: 1.3rem;
 }
+
 
 .heroSection button:hover{
     color: white;
@@ -81,7 +83,6 @@ hr{
     column-gap: 2rem;
     margin-bottom: 3rem;
     justify-content: center;
-
 }
 
 .collectionsWrapper a {
@@ -253,7 +254,6 @@ hr{
 }
 
 
-
 .socialContainer{
     display: flex;
     width: 40%;
@@ -316,6 +316,7 @@ hr{
 
 .subscribeWrapperHeader p{
     margin-top: -2rem;
+    text-align: center;
 }
 
 .subscribeWrapper hr{
@@ -367,3 +368,157 @@ hr{
     border-radius: 5px;
 }
 
+
+@media(max-width: 500px) {
+    .heroSection button{
+        right: 10rem;
+    }
+}
+
+@media(max-width: 980px) {
+    .collectionsWrapper{
+        height: max-content;
+        padding: .5rem;
+        display: flex;
+        row-gap: .5rem;
+    }
+
+    .collectiosItemWrapper {
+        width: 10rem;
+        height: 10rem;
+    }
+    
+    .collectiosItemWrapper img{
+        width: 10rem;
+        height: 10rem;
+    }
+
+    .collectiosItemWrapper p{
+        font-size: 1.3rem;
+        color: white;
+        background-color: rgb(135, 206, 235, 0.6);
+        padding: .5rem;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+@media(max-width:800px) {
+    .collectionsWrapper{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: max-content;
+    }
+}
+
+@media(max-width:660px) {
+    .collectionsWrapper{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        height: max-content;
+    }
+}
+
+@media(max-width:927px ) {
+    .randomPorductContainer a img{
+        width: 100%;
+        height: 60%;
+    }
+}
+
+@media(max-width:680px ) {
+    .randomPorductContainer{
+        width: 100%;
+    }
+
+    .randomPorductContainer a img{
+        width: 40%;
+        height: 40%;
+        position: absolute;
+        left: 0;
+    }
+
+    
+    .subscribeWrapperInputWrapper input{
+        width: 45%;
+        height: 20%;
+    }
+}
+
+@media(max-width:815px) {
+    .peopleSayingWrapper{
+        height: 15rem;
+    }
+
+    .peopleSayingWrapper >  :nth-child(2) p{
+        font-size: 1.5rem ;
+    }
+
+    
+    .subscribeWrapperInputWrapper input{
+        width: 40%;
+        height: 20%;
+    }
+}
+
+@media(max-width: 450px) {
+    .peopleSayingWrapper{
+        height: 10rem;
+    }
+
+    .peopleSayingWrapper >  :nth-child(2) p{
+        font-size: 1rem ;
+    }
+}
+
+@media(max-width:1122px) {
+    .subscribeWrapperInputWrapper button{
+        font-size: .7rem;
+        width: 15%;
+        padding: .5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+@media(max-width:762px) {
+    .subscribeWrapperInputWrapper button{
+        font-size: .7rem;
+        width: 20%;
+        padding: .5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+@media(max-width:650px) {
+    .subscribeWrapperInputWrapper button{
+        font-size: .5rem;
+        padding: .5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .subscribeWrapperInputWrapper input{
+        width:60%;
+    }
+}
+
+@media(max-width:550px){
+    .subscribeWrapperInputWrapper button{
+        font-size: .5rem;
+        width: 45%;
+        padding: .5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}

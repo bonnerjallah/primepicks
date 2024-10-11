@@ -6,19 +6,20 @@ import { faArrowRight } from "@fortawesome/free-solid-svg-icons"
 import Footer from "../components/Footer";
 import { useEffect } from "react";
 import axios from "axios"
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 const backEndUrl = import.meta.env.VITE_BACKENDURL
 
 import RandomTwelve from "../components/RandomTwelve";
 import { useCart } from "../components/CartContext";
-import ScrollToTop from "../components/ScrollToTop";
 import MoreDetails from "../components/MoreDetails";
 
 
 const Home = () => {
 
     // const {cartItems, addToCart, removeFromCart, totalPriceOfQuantity, totalAmount} = useCart()
+
+    const shopnowRef = useRef()
 
     const [storeData, setStoreData] = useState([])
     const [randomProduct, setRandomProduct] = useState([])
@@ -69,23 +70,23 @@ const Home = () => {
 
 
 
-
     return (
         <div className={homestyle.Container}>
             
-            {/* <ScrollToTop /> */}
-
             <div className={homestyle.heroSection}>
-                <a href="#main">
-                    <button>Shop Now</button>
-                </a>
+                <button onClick={() => {
+                    shopnowRef.current?.scrollIntoView({
+                        behavior: "smooth"
+                    })
+                }}>Shop Now</button>
             </div>
+
             <div className={homestyle.introWrapper}>
                 <p>Prime Picks was created to provide opportunity for local artisans, makers.</p>
                 <p>Our mission is to connect local producers to local consumers enabling the discovery of amazing products.</p>
             </div>
 
-            <main id="main">
+            <main ref={shopnowRef}>
                 <h2>Collections</h2>
                 <hr />
 

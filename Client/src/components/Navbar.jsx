@@ -7,7 +7,7 @@ import navbarstyles from "../styles/navbarstyles.module.css"
 import cartstyle from "../styles/cartstyle.module.css"
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faUser, faCartShopping, faMagnifyingGlass, faCaretDown, faGear, faCircleQuestion, faArrowRightFromBracket, faXmark, faMinus, faPlus, faHeart} from "@fortawesome/free-solid-svg-icons";
+import {faUser, faCartShopping, faMagnifyingGlass, faCaretDown, faGear, faCircleQuestion, faArrowRightFromBracket, faXmark, faMinus, faPlus, faHeart, faBars} from "@fortawesome/free-solid-svg-icons";
 
 import { useCart } from "./CartContext";
 import { useAuth } from "./AuthContext";
@@ -29,17 +29,20 @@ const Navbar = () => {
     const dropDwnRef = useRef(null)
     const closeDropDwnRef = useRef(null)
     const cartDialogRef = useRef(null)
+    const sideMenuRef = useRef(null)
+    const barIconRef = useRef(null)
 
 
     const [showDropDown, setShowDropDown] = useState(false)
     const [showCustomUserDialog, setShowCustomUserDialog] = useState(false)
+    const [showSideMenu, setShowSideMenu] = useState(false)
+    const [showSideBarDropDown, setShowSideBarDropDown] = useState(false)
 
-    const [allProducts, setAllProducts] = useState([])
     const [filterCartItems, setFilterCartItems] = useState([]);
 
     const [member, setMember] = useState("")
 
-    
+
 
     const handleShowDropDwon = () => {
         setShowDropDown(!showDropDown)
@@ -49,6 +52,7 @@ const Navbar = () => {
         setShowCustomUserDialog(!showCustomUserDialog)
     }
 
+    //handle click outside dropdown menu
     useEffect(() => {
         const handleCloseDropDwnClickOutSide = (event) => {
             if(
@@ -67,26 +71,26 @@ const Navbar = () => {
         }
     }, [showDropDown])
 
+
+    //handle click outside profile menu
     useEffect(() => {
         const handleClickOutside = (event) => {
-            if(
-                showCustomUserDialog &&
-                profileRef.current && !profileRef.current.contains(event.target) &&
-                iconRef.current && !iconRef.current.contains(event.target)
-            ) {
+            if(showCustomUserDialog && profileRef.current && !profileRef.current.contains(event.target) &&
+                iconRef.current && !iconRef.current.contains(event.target)) {
                 setShowCustomUserDialog(false)
             }
         }
 
         document.addEventListener("mousedown", handleClickOutside)
 
-
         return () => {
-            document.addEventListener("mousedown", handleClickOutside)
+            document.removeEventListener("mousedown", handleClickOutside)
         }
 
     }, [showCustomUserDialog])
 
+
+    //handle click outside cart
     useEffect(() => {
         const handleClickOutside = (e) => {
             if (cartDialogRef.current) {
@@ -110,7 +114,33 @@ const Navbar = () => {
             document.removeEventListener("mousedown", handleClickOutside);
         };
     }, []);
-    
+
+    //handle click outside side menu
+    useEffect(() => {
+        const handleClickOutsideSideMenu = (e) => {
+            if( showSideMenu && sideMenuRef.current && !sideMenuRef.current.contains(e.target) && 
+                barIconRef.current && !barIconRef.current.contains(e.target)) {
+                setShowSideMenu(false)
+            }
+        }
+
+        document.addEventListener("mousedown", handleClickOutsideSideMenu) 
+
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutsideSideMenu)
+        }
+    }, [showSideMenu])
+
+
+    const handleShowSideMenu = () => {
+        setShowSideMenu(!showSideMenu)
+    }
+
+
+    const handleShowSideBarDropDown = () => {
+        setShowSideBarDropDown(!showSideBarDropDown)
+    }
+
 
     axios.defaults.withCredentials = true
     useEffect(() => {
@@ -127,6 +157,7 @@ const Navbar = () => {
     
         fetchUserData();
     }, [user]);
+
 
     const handleLogOut = async () => {
         try {
@@ -160,7 +191,6 @@ const Navbar = () => {
                     : elem.price
                 }))
 
-                setAllProducts(formatedData)
 
                 const filterItems = data.filter(elem => 
                     cartItems.some(cartelem => cartelem.id === elem._id)
@@ -195,17 +225,20 @@ const Navbar = () => {
         fetchData()
     }, [cartItems])
 
+
     const handleOpenCart = () => {
         cartDialogRef.current?.showModal();
         document.body.style.overflow = "hidden";
 
         cartDialogRef.current?.addEventListener("close", handleCloseDialog);
     };
+
     
     const handleCloseDialog = () => {
         cartDialogRef.current?.close();
         document.body.style.overflow = ""; 
     };
+
 
     const handleGoToCheckOut = () => {
         handleCloseDialog()
@@ -215,6 +248,7 @@ const Navbar = () => {
     const handleMinusItemQuantity = (id) => {
         removeFromCart(id)
     };
+
 
     const handleAddItemFromCart = (id, price, salepercentage, quantity) => {
         console.log(id, price, salepercentage, quantity )
@@ -226,20 +260,61 @@ const Navbar = () => {
 
 
 
+
+
+
     return (
         <>
             <nav>
                 <div className={navbarstyles.logoWrapper}>
+
                     <NavLink to="/">
                         <img src="/images/logo.png" alt="" />
-                        {/* <p>PRIME PICKS</p> */}
                     </NavLink>
+
+                    <div className={`${navbarstyles.barsIconWrapper} ${showSideMenu ? navbarstyles.rotateBar : ""}`}>
+                        <FontAwesomeIcon icon={faBars} onClick={handleShowSideMenu} ref={barIconRef} />
+                    </div>
+                    
                 </div>
+
+                <div className={`${navbarstyles.hidesideMenuContainer} ${showSideMenu ? navbarstyles.sideMenuContainer : ""}`} ref={sideMenuRef}>
+                    <NavLink to="/">
+                        <img src="/images/logo.png" alt="" />
+                    </NavLink> 
+
+                    <ul>
+                        <li className={navbarstyles.sideMenueDropDownContainer}>
+                            <div>
+                                <p onClick={handleShowSideBarDropDown}>
+                                    SHOP <span><FontAwesomeIcon icon={faCaretDown} /></span>
+                                </p>
+                            </div>
+                            <ul className={`${navbarstyles.sideMenuDropDownListWrapper} ${showSideBarDropDown ? navbarstyles.showSideDropDown : ""}`}>
+                                <NavLink to="/MenFashion"><li>Men Fashions</li></NavLink>
+                                <NavLink to="/WomenFashion"><li>Women Fashions</li></NavLink>
+                                <NavLink to='/MenAccessories'><li>Men Accessories</li></NavLink>
+                                <NavLink to="/WomenAccessories"><li>Women Accessories</li></NavLink>
+                                <NavLink to='/Watches'><li>Watches</li></NavLink>
+                                <NavLink to="/Shoes"><li>Shoes</li></NavLink>
+                            </ul>
+                        </li>
+
+                        <NavLink>
+                            <li>GIFT BASKETS</li>
+                        </NavLink>
+
+                        <NavLink>
+                            <li>CONTACT</li>
+                        </NavLink>
+                    </ul>
+                </div>
+                
                 <div className={navbarstyles.linkWrapper}>
                     <ul>
                         <NavLink to="/">
                             <li>HOME</li>
-                        </NavLink>
+                        </NavLink>  
 
                         <li className={navbarstyles.dropDwnWrapper}>
                             <div>
@@ -263,6 +338,7 @@ const Navbar = () => {
                             <li>CONTACT</li>
                         </NavLink>
                     </ul>
+
                     <div className={navbarstyles.iconWrapper}>
                         <div>
                             <FontAwesomeIcon icon={faUser} onClick={handleShowCustomDialog} ref={iconRef} className={navbarstyles.userIcon} />
