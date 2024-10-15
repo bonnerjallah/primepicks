@@ -7,6 +7,8 @@
     flex-direction: column;
     background-color: #8bc9fc;
     padding-bottom: 1rem;
+    overflow: hidden;
+    padding-bottom: 5rem;
 }
 
 .mainContainer h1{
@@ -50,9 +52,8 @@
 
 .editWrapper{
     display: grid;
-    grid-template-rows: 30% 30% 30%;
+    grid-template-rows: 30% 64% ;
     row-gap: 1rem;
-    padding: .5rem 0;
 }
 
 .editWrapper * > h2{
@@ -65,29 +66,51 @@
 .productWrapper{
     background-color: aliceblue;
     padding: .3rem;
+    height: 97%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
 }
 
 .promotionalWrapper,
-.salesProductWrapper,
-.lowStockProductsWrapper{
+.editFromContainer{
     background-color: aliceblue;
+}
+
+.promotionalWrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.editFromContainer form fieldset{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    row-gap: .5rem;
+    padding-left: 26%;
+    padding-top: .5rem;
+}
+
+.editFromContainer form fieldset label{
+    display: flex;
+    width: max-content;
+}
+
+.editFromContainer form div{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: .5rem;
+    align-items: center;
 }
 
 .productImageAndInputWrapper{
     display: flex;
     column-gap: 5rem;
+    height: max-content;
 }
 
-.productImageWrapper{
-    border: 2px solid gold;
-    width: 25%;
-}
 
-.promotionalWrapper form,
-.salesProductWrapper form{
-    display: flex;
-    flex-direction: column;
-    row-gap: .5rem;
-    margin-top: .5rem;
-}
 

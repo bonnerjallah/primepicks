@@ -10,6 +10,7 @@
     display: flex;
     flex-direction: column;
     background-color: #8bc9fc;
+    overflow-y: hidden;
 }
 
 .mainContainer h1{
@@ -51,7 +52,10 @@ input[type="number"] {
 .productListWrapper{
     background-color: aliceblue;
     width: 50%;
-    height: 100%;
+    height: 90%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding: 1rem;
 }
 
 .addProductWrapper form{
@@ -77,7 +81,16 @@ fieldset label{
     border: none;
 }
 
-form button{
+.buttonWrapper{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    position: relative;
+    row-gap: .5rem;
+}
+
+form button,
+.putOnSaleBttn{
     width: 7rem;
     height: 2rem;
     border-radius: 5px;
@@ -90,7 +103,8 @@ form button{
     margin-top: 1rem;
 }
 
-form button::before{
+form button::before,
+.putOnSaleBttn::before{
     content: "";
     position: absolute;
     top: 0;
@@ -101,7 +115,9 @@ form button::before{
 }
 
 form button:hover::before,
-form button:focus::before{
+form button:focus::before,
+.putOnSaleBttn:hover::before,
+.putOnSaleBttn:focus::before{
     top: calc(var(--border-size) * -2);
     left: calc(2px * -2);
     right: calc(2px * -2);
@@ -109,6 +125,131 @@ form button:focus::before{
     border-radius: 5px;
 }
 
+.discountBttn{
+    width: 7rem;
+    height: 2rem;
+    border-radius: 5px;
+    border: none;
+    background-color: #3092e2 ;
+    color: white;
+    cursor: pointer;
+    position: relative;
+    align-self: center;
+    margin-top: 1rem;
+}
 
+.discountBttn::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: var(--border-size) solid #3092e2;
+}
 
+.discountBttn:hover::before{
+    top: calc(var(--border-size) * -2);
+    left: calc(2px * -2);
+    right: calc(2px * -2);
+    bottom: calc(2px * -2);
+    border-radius: 5px;
+}
 
+.deleteBttn{
+    width: 7rem;
+    height: 2rem;
+    border-radius: 5px;
+    border: none;
+    background-color: #e32a2a ;
+    color: white;
+    cursor: pointer;
+    position: relative;
+    align-self: center;
+    margin-top: 1rem;
+}
+
+.deleteBttn::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: var(--border-size) solid #e32a2a;
+}
+
+.deleteBttn:hover::before{
+    top: calc(var(--border-size) * -2);
+    left: calc(2px * -2);
+    right: calc(2px * -2);
+    bottom: calc(2px * -2);
+    border-radius: 5px;
+}
+
+.allProductsHeaderWrapper{
+    margin-bottom: 1rem;
+}
+
+.allProductsHeaderWrapper h2{
+    margin-bottom: .5rem;
+    display: flex;
+    justify-content: center;
+}
+
+.imageWrapper{
+    display: flex;
+    column-gap: 1rem;
+}
+
+.priceTitleWrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: max-content;
+    align-items: flex-start;
+    position: relative;
+}
+
+.imageWrapper > :nth-child(2) :nth-child(1)  {
+    font-weight: bold;
+}
+
+.opitionsWrapper{
+    display: flex;
+    column-gap: 1rem;
+}
+
+.productsWrapper{
+    display: flex;
+    justify-content: space-between;
+    padding: .5rem;
+    border-bottom: 1px solid black;
+}
+
+.productsWrapper >{
+    position: absolute;
+    left: 0;
+}
+
+.onSaleWrapper{
+    background-color: red;
+    width: max-content;
+    height: 40%;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    padding: .5rem;
+    border-radius: 20%;
+    text-align: center;
+}
+
+.onsaleAndBttnWrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

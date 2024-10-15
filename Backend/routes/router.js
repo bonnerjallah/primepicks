@@ -5,6 +5,8 @@ const path = require("path")
 
 const {addNewProduct} = require("./posts")
 const {getAllProducts} = require("./gets")
+const {editProduct} = require("./puts")
+const {deleteItem} = require("./deletes")
 const {register, login, validateAccessToken, refreshToken, getMember, logOut} = require("../controllers/controller")
 
 
@@ -51,6 +53,10 @@ router.post("/register", register)
 router.post("/loginmember", login)
 router.post("/refresh_token", refreshToken)
 router.post("/logout", logOut)
+
+router.put("/editproduct", upload.single("editedImage"), editProduct)
+
+router.delete("/deleteitem/:id", deleteItem)
 
 
 module.exports = router;

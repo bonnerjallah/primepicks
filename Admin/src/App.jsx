@@ -1,5 +1,8 @@
 import {createBrowserRouter, createRoutesFromElements, Route, RouterProvider} from "react-router-dom"
 
+import { ProductsProvider } from "./components/ProductsContext"
+
+
 import Nav from "./components/Nav"
 import Home from "./pages/Home"
 import ModifyProducts from "./pages/ModifyProducts"
@@ -13,7 +16,7 @@ const router = createBrowserRouter(
     <Route path="/" element={<Nav/>}>
       <Route path="/" element={<Home/>}/>
       <Route path="/ModifyProducts" element={<ModifyProducts />} />
-      <Route path="/InventoryManagement" element={<InventoryManagement />} />
+      <Route path="/InventoryManagement/:id" element={<InventoryManagement />} />
       <Route path="/ViewOrderAndStatus" element={<ViewOrderAndStatus />} />
       <Route path="/Billing" element={<Billing />}/>
     </Route>
@@ -24,9 +27,9 @@ const router = createBrowserRouter(
 function App() {
 
   return (
-    <>
+    <ProductsProvider>
       <RouterProvider router={router}/>
-    </>
+    </ProductsProvider>
   )
 }
 
