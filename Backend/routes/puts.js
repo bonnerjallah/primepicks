@@ -1,11 +1,10 @@
 const Products = require("../model/productsmodel")
+const PurchaseOrder = require("../model/purchaseordermodel") 
 const path = require("path")
 const fs = require("fs")
 
 const editProduct = async (req, res) => {
     try {
-        console.log("data received", req.body)
-        console.log("filename", req.file)
         
         const {id, category, description, price, rating, salepercentage, title, sale } = req.body
         const imageToEdit = req.file ? path.basename(req.file.path) : ""
@@ -61,4 +60,32 @@ const editProduct = async (req, res) => {
     }
 }
 
-module.exports = {editProduct}
+const orderShipped = async (req, res) => {
+    try {
+        const {id} = req.params
+
+        console.log("id recieved", id)
+
+        const itemToUpDate = await PurchaseOrder.findById(id)
+
+        if(!itemToUpDate) {
+            return res.status(404).json({message: "No item matches"})
+        }
+
+        itemToUpDate.orderstatus = "shipped";
+        itemToUpDate.updatedAt = new Date();
+        itemToUpDate.paymentstatus = "paid";
+
+        await itemToUpDate.save()
+
+        return res.status(200).json({order:itemToUpDate})
+
+    
+        
+    } catch (error) {
+        console.log("Error updating shipped order", error)
+        return res.status(500).json({message: "Internal server issue"})
+    }
+}
+
+module.exports = {editProduct, orderShipped}

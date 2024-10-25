@@ -251,7 +251,6 @@ const Navbar = () => {
 
 
     const handleAddItemFromCart = (id, price, salepercentage, quantity) => {
-        console.log(id, price, salepercentage, quantity )
         
             addToCart({id, quantity: quantity, price, salepercentage})
             console.log("added")

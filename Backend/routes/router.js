@@ -3,9 +3,9 @@ const multer = require("multer")
 const path = require("path")
 
 
-const {addNewProduct} = require("./posts")
-const {getAllProducts} = require("./gets")
-const {editProduct} = require("./puts")
+const {addNewProduct, orders} = require("./posts")
+const {getAllProducts, getallSubscribedMember, getOrders} = require("./gets")
+const {editProduct, orderShipped} = require("./puts")
 const {deleteItem} = require("./deletes")
 const {register, login, validateAccessToken, refreshToken, getMember, logOut} = require("../controllers/controller")
 
@@ -46,6 +46,8 @@ const upload = multer({
 
 router.get("/getallproducts", getAllProducts)
 router.get("/getmember", validateAccessToken, getMember)
+router.get("/getallsubscribedmembers", getallSubscribedMember)
+router.get("/getorders", getOrders)
 
 
 router.post("/addproduct", upload.single("image"), addNewProduct)
@@ -53,8 +55,10 @@ router.post("/register", register)
 router.post("/loginmember", login)
 router.post("/refresh_token", refreshToken)
 router.post("/logout", logOut)
+router.post("/purchaseorders", orders )
 
 router.put("/editproduct", upload.single("editedImage"), editProduct)
+router.put("/shiporder/:id", orderShipped)
 
 router.delete("/deleteitem/:id", deleteItem)
 

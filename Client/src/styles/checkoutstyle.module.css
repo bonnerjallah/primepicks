@@ -79,6 +79,7 @@ input[type="Number"]::-webkit-outer-spin-button {
 
 .customerInfoContainer > :nth-child(2) input,
 .customerInfoContainer > :nth-child(3) input,
+.customerInfoContainer > :nth-child(4) input,
 .customerInfoContainer > :last-child input{
     width: 100%;
     height: 2rem;
@@ -245,6 +246,7 @@ input[type="Number"]::-webkit-outer-spin-button {
     display: flex;
     justify-content: space-between;
     width: 100%;
+    height: 4rem;
 }
 
 .discountWrapper input{
@@ -257,13 +259,13 @@ input[type="Number"]::-webkit-outer-spin-button {
     height: 100%;
 }
 
-.cartFooter > :nth-child(2){
+.cartFooter .priceDetails > :nth-child(2){
     display: flex;
     flex-direction: column;
     row-gap: .2rem;
 }
 
-.cartFooter > :nth-child(2) div {
+.cartFooter .priceDetails > :nth-child(2) div {
     display: flex;
     justify-content: space-between;
 }

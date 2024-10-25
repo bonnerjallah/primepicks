@@ -15,18 +15,35 @@
     color: #72195a;
 }
 
+
 table{
     width: 100%;
-    height: 100%;
-    border: 1px solid black;
-    background-color: aliceblue;
+    border-collapse: collapse;
 }
 
+thead{
+    color: white;
+    background-color: darkblue;
+}
 
-.tableWrapper{
-    width: 98%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+th{
+    border: 2px solid white;
+    padding: .5rem 0;
+}
+
+td{
+    border: 2px solid white;
+    padding: .3rem;
+    text-align: center;
+}
+
+tbody tr td a {
+    text-decoration: none;
+    color: black
+}
+
+tbody tr:hover,
+tbody tr td a:hover {
+    background-color: white;
+    color: blue;
 }

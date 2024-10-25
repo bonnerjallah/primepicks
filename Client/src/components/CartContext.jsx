@@ -22,7 +22,6 @@ export const CartProvider = ({ children }) => {
     }, [cartItems]);
 
     const addToCart = (item) => {
-        console.log(item)
         setCartItems((prevItems) => {
             const existingItem = prevItems.find(cartItem => cartItem.id === item.id);
             if (existingItem) {
@@ -33,6 +32,10 @@ export const CartProvider = ({ children }) => {
             }
         });
     };
+
+    const clearCart = () => {
+        setCartItems([])
+    }
 
     const removeFromCart = (id) => {
         setCartItems((prevItems) => {
@@ -102,7 +105,7 @@ export const CartProvider = ({ children }) => {
 
 
     return (
-        <CartContext.Provider value={{ cartItems, addToCart, wishListItems, addToWishList, removeFromWishList, removeFromCart, totalItems, totalAmount }}>
+        <CartContext.Provider value={{ cartItems, addToCart, wishListItems, addToWishList, removeFromWishList, removeFromCart, totalItems, totalAmount, clearCart }}>
 
             {children}
             

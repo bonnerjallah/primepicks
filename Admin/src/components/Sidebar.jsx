@@ -82,10 +82,10 @@ const Sidebar = () => {
                             <NavLink to="/ViewOrderAndStatus">
                                 <li>View Orders</li>
                             </NavLink>
-                            <NavLink to="/ViewOrderAndStatus">
+                            <NavLink to="/OrderStatusUpdate/_id">
                                 <li>Order Status Updates</li>
                             </NavLink>
-                            <NavLink to="/ViewOrderAndStatus">
+                            <NavLink >
                                 <li>Customer Notification</li>
                             </NavLink>
                         </ul>

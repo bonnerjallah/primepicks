@@ -1,4 +1,4 @@
-import { useSearchParams, NavLink } from "react-router-dom"
+import { useSearchParams, NavLink, useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react";
 
 import axios from "axios";
@@ -33,11 +33,150 @@ const stateAbbreviations = [
 
 const CheckOut = () => {
 
-    const {cartItems, totalAmount} = useCart([])
+    const {cartItems, totalAmount, clearCart} = useCart([])
+    const navigate = useNavigate()
     
     const [grandTotalAmount, setGrandTotalAmount] = useState(0);
     const [filterCartItems, setFilterCartItems] = useState([]);
+
     const [shippingMethod, setShippingMethod] = useState('')
+    const [shapingAsBilling, setShippingAsBilling] = useState(false)
+    const [billing, setBilling] = useState({
+        billingaddress: "",
+        billingaptnumber: "",
+        billingcity: "",
+        billingzipcode: ""
+    })
+    const [billingstate, setBillingState] = useState("")
+    const [emailMe, setEmailMe] = useState(false)
+    const [state, setState] = useState("")
+
+    const [checkOut, setCheckOut] = useState({
+        email: "",
+        firstname: "",
+        lastname: "",
+        address: "",
+        aptnumber: "",
+        city: "",
+        zipcode: "",
+        state: "",
+        phonenumber: "",
+        cardnumber: "",
+        expdate: "",
+        seccode: "",
+        nameoncard: "",
+    })
+
+    const [successMsg, setSuccessMsg] = useState("")
+
+    useEffect(() => {
+        if (shapingAsBilling) {
+            setBilling({
+                billingaddress: checkOut.address,
+                billingaptnumber: checkOut.aptnumber,
+                billingcity: checkOut.city,
+                billingzipcode: checkOut.zipcode,
+                billingstate: checkOut.state
+            });
+
+            setBillingState({
+                billingstate: checkOut.state
+            })
+        }
+    }, [shapingAsBilling, checkOut]);
+
+
+    const handleCheckOutDataSubmit = async (e) => {
+        e.preventDefault()
+
+        let shipMtd;
+        switch (shippingMethod) {
+            case "Free":
+                shipMtd = "Economy"
+                break;
+            
+            case "8.44":
+                shipMtd = "usps"
+                break;
+            
+            case "47.25":
+                shipMtd = "ups"
+                break
+        
+            default:
+                break;
+        }
+
+        const shipingSameAsBilling = shapingAsBilling ? "true" : ""
+    
+        const dataToSubmit = {
+            ...checkOut,
+            filterCartItems,
+            grandTotalAmount,
+            shipMtd,
+            shipingSameAsBilling,
+            billingstate, 
+            emailMe,
+            state
+        }
+
+
+        try {
+            const response = await axios.post(`${backEndUrl}/purchaseorders`, dataToSubmit, {
+                headers: {"Content-Type": "application/json"}
+            })
+
+            if(response.status === 200) {
+
+                setSuccessMsg("Order place successfully, Check Email for Tracking")
+
+                setCheckOut({
+                    email: "",
+                    firstname: "",
+                    lastname: "",
+                    address: "",
+                    aptnumber: "",
+                    city: "",
+                    zipcode: "",
+                    state: "",
+                    phonenumber: "",
+                    cardnumber: "",
+                    expdate: "",
+                    seccode: "",
+                    nameoncard: "",
+                })
+
+                setBilling({
+                    billingaddress: "",
+                    billingaptnumber: "",
+                    billingcity: "",
+                    billingzipcode: ""
+                })
+
+                setEmailMe(false)
+
+                setShippingAsBilling(false)
+
+                setShippingMethod("")
+
+
+                setFilterCartItems([])
+
+                clearCart([])
+
+                setTimeout(() => {
+                    setSuccessMsg("")
+                    navigate('/')
+                }, 3000);
+
+            }
+            
+        } catch (error) {
+            console.log("Error inserting order data", error)
+        }
+    }
+
+
 
 
     //Fetch filter porduct data and cart items
@@ -92,7 +231,6 @@ const CheckOut = () => {
         setShippingMethod(ev.target.value)
     }
 
-
     useEffect(() => {
         const handleGrandTotalAmount = () => {
             const parsedTotalAmount = parseFloat(totalAmount.replace(/,/g,""))
@@ -113,20 +251,36 @@ const CheckOut = () => {
 
 
 
+    const handleCheckOutInput = (e) => {
+        const { name, value } = e.target;
+    
+        if (name.includes("billing")) {
+            setBilling((prev) => ({ ...prev, [name]: value }));
+        } else {
+            setCheckOut((prev) => ({ ...prev, [name]: value }));
+        }
+    };
+    
+
+
+
+
     return (
         <>
         <ScrollToTop />
             <div className={checkoutstyle.mainContainer}>
+
+
                 <div className={checkoutstyle.checkOutDetailsContainer}>
-                    <form >
+                    <form onSubmit={handleCheckOutDataSubmit}>
                         <fieldset className={checkoutstyle.contactMeContainer}>
                             <h2>Contact</h2>
                             <label htmlFor="Contact">
-                                <input type="text" name="contact" id="Contact" placeholder="Email or mobile phone number" required />
+                                <input type="text" name="email" value={checkOut.email} id="Contact" placeholder="Email" required onChange={handleCheckOutInput} />
                             </label>
 
                             <label htmlFor="EmailMe">
-                                <input type="checkbox" name="emalme" id="EmailMe" />
+                                <input type="checkbox" checked={emailMe} name="emailme" id="EmailMe" onChange={(e) => {setEmailMe(e.target.checked)}} />
                                 Email me with news and offers
                             </label>
                         </fieldset>
@@ -134,29 +288,33 @@ const CheckOut = () => {
                         <fieldset className={checkoutstyle.customerInfoContainer}>
                             <div>
                                 <label htmlFor="FirstName">
-                                    <input type="text" name="firstname" id="FirstName" placeholder="First Name" required />
+                                    <input type="text" name="firstname" value={checkOut.firstname} id="FirstName" placeholder="First Name" required onChange={handleCheckOutInput} />
                                 </label>
 
                                 <label htmlFor="LastName">
-                                    <input type="text" name="lastname" id="LastName" placeholder="Last Name" required />
+                                    <input type="text" name="lastname" value={checkOut.lastname} id="LastName" placeholder="Last Name" required onChange={handleCheckOutInput} />
                                 </label>
                             </div>
                             
                             <label htmlFor="Address">
-                                <input type="text" name="address" id="Address" placeholder="Address" required />
+                                <input type="text" name="address" id="Address" value={checkOut.address} placeholder="Address" required onChange={handleCheckOutInput} />
                             </label>
 
                             <label htmlFor="ApartmentNumber">
-                                <input type="text" name="aptnumber" id="ApartmentNumber" placeholder="Apartment, suite, etc (optional)" />
+                                <input type="text" name="aptnumber" value={checkOut.aptnumber} id="ApartmentNumber" placeholder="Apartment, suite, etc (optional)" onChange={handleCheckOutInput} />
+                            </label>
+
+                            <label htmlFor="City">
+                                <input type="text" name="city" value={checkOut.city} id="City" placeholder="City" required onChange={handleCheckOutInput} />
                             </label>
 
                             <div>
                                 <label htmlFor="ZipCode">
-                                    <input type="number" name="zipcode" id="ZipCode" placeholder="Postal Code" required />
+                                    <input type="number" name="zipcode" value={checkOut.zipcode} id="ZipCode" placeholder="Postal Code" required onChange={handleCheckOutInput} />
                                 </label>
 
                                 <label htmlFor="State">
-                                    <select name="state" id="State">
+                                    <select name="state" id="State"  onChange={(e) => {setState(e.target.value)}}>
                                             {stateAbbreviations.map((elem, index) => (
                                                 <option key={index} value={elem}>
                                                     {elem}
@@ -167,7 +325,7 @@ const CheckOut = () => {
                             </div>
 
                             <label htmlFor="PhoneNumber">
-                                <input type="number" name="phonenumber" id="PhoneNumber" placeholder="Phone Number (optional)"  />
+                                <input type="number" name="phonenumber" value={checkOut.phonenumber} id="PhoneNumber" placeholder="Phone Number (optional)" onChange={handleCheckOutInput}  />
                             </label>
                         </fieldset>
 
@@ -177,7 +335,7 @@ const CheckOut = () => {
 
                             <div>
                                 <label htmlFor="Economy">
-                                    <input type="radio" name="shippingMethod" id="Economy" value="Free" onChange={handleShippingMethod} />
+                                    <input type="radio" name="shippingeconomy" id="Economy" value="Free" onChange={handleShippingMethod} />
                                     <span>
                                         Economy
                                         <small>5 to 8 business days</small>
@@ -188,7 +346,7 @@ const CheckOut = () => {
 
                             <div>
                                 <label htmlFor="USPS">
-                                    <input type="radio" name="shippingMethod" id="USPS" value="8.44" onChange={handleShippingMethod} />
+                                    <input type="radio" name="shippingusps" id="USPS" value="8.44" onChange={handleShippingMethod} />
                                     <span>
                                         USPS Ground Advantage
                                         <small>5 business days</small>
@@ -199,7 +357,7 @@ const CheckOut = () => {
 
                             <div>
                                 <label htmlFor="UPS">
-                                    <input type="radio" name="shippingMethod" id="UPS" value="47.25" onChange={handleShippingMethod} />
+                                    <input type="radio" name="shippingups" id="UPS" value="47.25" onChange={handleShippingMethod} />
                                     <span>
                                         UPS Priority Mail
                                         <small>1 business day</small>
@@ -213,26 +371,26 @@ const CheckOut = () => {
                         <fieldset className={checkoutstyle.paymentContainer}>
                             <h2>Payment</h2>
                             <label htmlFor="CardNumber">
-                                <input type="number" name="cardnumber" id="CardNumber" placeholder="Card number" required />
+                                <input type="number" name="cardnumber" value={checkOut.cardnumber} id="CardNumber" placeholder="Card number" required onChange={handleCheckOutInput} />
                             </label>
 
                             <div>
                                 <label htmlFor="ExpDate">
-                                    <input type="number" name="expdate" id="ExpDate" placeholder="Expiration date (MM/YY)" required />
+                                    <input type="number" name="expdate" value={checkOut.expdate} id="ExpDate" placeholder="Expiration date (MM/YY)" required onChange={handleCheckOutInput} />
                                 </label>
 
                                 <label htmlFor="SecCode">
-                                    <input type="number" name="seccode" id="SecCode" placeholder="Security code" required />
+                                    <input type="number" name="seccode" value={checkOut.seccode} id="SecCode" placeholder="Security code" required onChange={handleCheckOutInput} />
                                 </label>
                             </div>
 
                             <label htmlFor="NameOnCard">
-                                <input type="text" name="nameoncard" id="NameOnCard" placeholder="Name On Card" required />
+                                <input type="text" name="nameoncard" value={checkOut.nameoncard} id="NameOnCard" placeholder="Name On Card" required onChange={handleCheckOutInput} />
                             </label>
 
                             
                             <label htmlFor="SameAddress">
-                                <input type="checkBox" name="sameaddress" id="SameAddress" />
+                                <input type="checkBox" name="sameaddress" checked={shapingAsBilling} id="SameAddress" onChange={(e) => setShippingAsBilling(e.target.checked)} />
                                 <span>Use shipping address as billing address</span>
                             </label>
 
@@ -240,20 +398,20 @@ const CheckOut = () => {
                                 <h4>Billing Address</h4>
                                 
                                 <label htmlFor="BillingAddress">
-                                    <input type="text" name="billingaddress" id="BillingAddress" placeholder="Address" required />
+                                    <input type="text" name="billingaddress" value={billing.billingaddress} id="BillingAddress" placeholder="Address" required onChange={handleCheckOutInput} />
                                 </label>
 
                                 <label htmlFor="BillingAptNumber">
-                                    <input type="text" name="billingaptnumber" id="BillingAptNumber" placeholder="Apartment, suite, etc (optional)" />
+                                    <input type="text" name="billingaptnumber" value={billing.billingaptnumber} id="BillingAptNumber" placeholder="Apartment, suite, etc (optional)" onChange={handleCheckOutInput} />
                                 </label>
 
                                 <div>
                                     <label htmlFor="BillingCity">
-                                        <input type="text" name="billingcity" id="BillingCity" placeholder="City" required />
+                                        <input type="text" name="billingcity" value={billing.billingcity} id="BillingCity" placeholder="City" required onChange={handleCheckOutInput} />
                                     </label>
 
                                     <label htmlFor="BillingState">
-                                        <select name="billingstate" id="BillingState">
+                                        <select name="billingstate" id="BillingState" onChange={(e) => {setBillingState(e.target.value)}}>
                                                 {stateAbbreviations.map((elem, index) => (
                                                     <option key={index} value={elem}>
                                                         {elem}
@@ -263,7 +421,7 @@ const CheckOut = () => {
                                     </label>
 
                                     <label htmlFor="BillingZipCode">
-                                        <input type="number" name="billingZipCode" id="BillingZipCode" placeholder="Postal code" required />
+                                        <input type="number" name="billingzipcode" value={billing.billingzipcode} id="BillingZipCode" placeholder="Postal code" required onChange={handleCheckOutInput} />
                                     </label>
                                 </div>
                             </div>
@@ -278,7 +436,7 @@ const CheckOut = () => {
 
                 <div className={checkoutstyle.chartContainer}>
 
-                    {filterCartItems && filterCartItems.length > 0  && (
+                    {filterCartItems && filterCartItems.length > 0  ? (
                         <div className={checkoutstyle.itemsContainer}>
                             {filterCartItems.map((elem, id) => (
                                 <div key={id} className={checkoutstyle.cartWrapper}>
@@ -302,32 +460,51 @@ const CheckOut = () => {
                                 </div>
                             ))}
                         </div>
+                    ) : (
+                        <div style={{fontSize:"2rem", color:"blue", position: "fixed", marginLeft:"20%", top:"10rem", cursor:"pointer"}}>
+                            <NavLink to="/">
+                                <p>Continue Shopping</p>
+                            </NavLink>
+                        </div>
                     )}
                     <div className={checkoutstyle.cartFooter}>
 
-                        <div className={checkoutstyle.discountWrapper}>
-                            <input type="text" name="promotionalDiscount" id="PromotionDiscount" placeholder="Discount code or gift card" />
-                            <button>Apply</button>
-                        </div>
-
-                        <div>
+                        {successMsg ? (
                             <div>
-                                <p>SUBTOTAL - <span>{cartItems.length} items</span></p>
-                                <strong>$ {totalAmount}</strong>
+                                {successMsg && (<p style={{fontSize:"2rem", color:"black"}}>{successMsg}</p>)}
+
                             </div>
-                            <div>
-                                <p>Shipping</p>
-                                <span>{shippingMethod ? shippingMethod : "Free"}</span>
-                            </div>
-                        </div>
+
+                        ) : (
+                            
+                            <div className={checkoutstyle.priceDetails}>
+                                <div className={checkoutstyle.discountWrapper}>
+                                    <input type="text" name="promotionalDiscount" id="PromotionDiscount" placeholder="Discount code or gift card" />
+                                    <button>Apply</button>
+                                </div>
+
+                                <div>
+                                    <div>
+                                        <p>SUBTOTAL - <span>{cartItems.length} items</span></p>
+                                        <strong>$ {totalAmount}</strong>
+                                    </div>
+                                    <div>
+                                        <p>Shipping</p>
+                                        <span>{shippingMethod ? shippingMethod : "Free"}</span>
+                                    </div>
+                                </div>
 
 
-                        <div className={checkoutstyle.shippingAndTotalWrapper}>
-                            <div style={{fontSize:"1.5rem"}}>
-                                <p><strong>Total:</strong></p>
-                                <p>USD <strong style={{ color:"white"}}>${grandTotalAmount}</strong></p>
+                                <div className={checkoutstyle.shippingAndTotalWrapper}>
+                                    <div style={{fontSize:"1.5rem"}}>
+                                        <p><strong>Total:</strong></p>
+                                        <p>USD <strong style={{ color:"white"}}>${grandTotalAmount}</strong></p>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                        )}
+
+                        
                     </div>
                 </div>
                 

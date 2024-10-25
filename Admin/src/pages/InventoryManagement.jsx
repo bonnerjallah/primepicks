@@ -18,9 +18,6 @@ import modifyproductstyle from "../styles/modifyproductsstyle.module.css"
 
 
 
-
-
-
 const InventoryManagement = () => {
     
     const {id} = useParams()
@@ -37,14 +34,10 @@ const InventoryManagement = () => {
         setProductForEditing(id);
     },[])
 
-    // useEffect(() => {
-    //     setProductForEditing(id); // Call the context function when the component mounts
-    // }, [id]);
-
 
 
     const handleInputChange  = (e) => {
-        handleProductInputData(e); // Call the context input handle
+        handleProductInputData(e); 
     }
 
     const handleProdEditImage = (e) => {

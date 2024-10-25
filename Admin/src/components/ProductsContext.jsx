@@ -94,7 +94,7 @@ export const ProductsProvider = ({children}) => {
     }
 
     const applySort = (sortType) => {
-        const sortedProduct = filterProducts.length > 0 ? [...filterProducts] : [...allProducts];
+        let sortedProduct = filterProducts.length > 0 ? [...filterProducts] : [...allProducts];
     
         switch (sortType) {
             case "category":
@@ -279,13 +279,15 @@ export const ProductsProvider = ({children}) => {
 
     
     useEffect(() => {
-        fetchStoreProducts(); // Fetch products on mount
+        fetchStoreProducts(); 
     }, []);
+
+    
 
     return (
         <ProductContext.Provider value={{
             fetchStoreProducts, 
-            allProducts, 
+            allProducts,
             addProduct, 
             filterProducts, 
             applyFilter, 

@@ -75,8 +75,6 @@ const ModifyProducts = () => {
         applySort(sortType)
     };
     
-    console.log("all products", allProducts)
-    
 
 
 

@@ -32,13 +32,6 @@
     justify-content: space-evenly;
 }
 
-.customerBoxWrapper{
-    background-color: aliceblue;
-    border-radius: 5px;
-    padding: .5rem;
-    color: #090c9b;
-}
-
 .salesBox,
 .revenueBox,
 .expensesBox{
@@ -51,10 +44,6 @@
     color: #090c9b;
 }
 
-.customersBox{
-    width: 100%;
-    height: 10rem;
-}
 
 h2{
     display: flex;
@@ -102,3 +91,166 @@ h2 span{
     border-radius: 5px;
     padding: .5rem;
 }
+
+.subBoxWrapper{
+    display: flex;
+    align-items: center;
+    column-gap: 1rem;
+    height: 80%;
+}
+
+.subIcon{
+    color: #090c9b;
+    height: 1rem;
+    background-color: lightblue;
+    padding: 1rem;
+    width: 10%;
+    border-radius: 50%;
+}
+
+.subBoxWrapper div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: .5rem;
+}
+
+.customerBoxWrapper{
+    background-color: aliceblue;
+    border-radius: 5px;
+    padding: .5rem;
+    color: #090c9b;
+    display: flex;
+    flex-direction: column;
+}
+
+.customerBoxWrapper > div{
+    display: flex;
+}
+
+.userIcon{
+    width: 10%;
+    height: 60%;
+    background-color: lightblue;
+    border-radius: 50%;
+    padding: 1rem;
+}
+
+.customerSubBoxWrapper{
+    display: flex;
+    align-items: center;
+    column-gap: 2.5rem;
+    height: 80%;
+}
+
+.customersBox{
+    width: 50%;
+    height: 10rem;
+    padding: 1rem;
+}
+
+.customerSubBoxWrapper div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: .5rem;
+}
+
+.customerListWrapper{
+    width: 50%;
+}
+
+.customerBioWapper{
+    background-color: #090c9b;
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: .2rem;
+}
+
+.customerBioWapper p{
+    color: white;
+    width: 50%;
+    text-align: center;
+}
+
+.subscriberWrapper{
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+
+.subscriberWrapper ul{
+    display: flex;
+    flex-direction: column;
+
+}
+
+.subscriberWrapper ul li{
+    list-style: none;
+    border-bottom: 1px solid WHITE;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 1rem;
+    margin: .2rem 0;
+}
+
+.saleCustomerHeader,
+.topSellingHeader{
+    color: #090c9b;
+    font-weight: bold;
+    font-size: 1.2rem;
+    display: flex;
+    justify-content: space-between;
+    margin-top: .5rem;
+}
+
+.saleCustomerHeader p,
+.orderdetailsWrapper p{
+    width: 7rem;
+}
+
+
+.allOrdersWrapper{
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    height: 15rem;
+    padding-top: .5rem;
+}
+
+.orderdetailsWrapper{
+    display: flex;
+    justify-content: space-between;
+    border: .5px solid black;
+}
+
+.orderdetailsWrapper p{
+    display: flex;
+    justify-content: cneter;
+    align-items: center;
+    padding-left: .4rem;
+}
+
+.orderdetailsWrapper > :first-child {
+    font-size: .8rem;
+}
+
+.productImageAndPriceWrapper{
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    row-gap: .3rem;
+    width: 20rem;
+    max-height: 5rem;
+    padding-left: 2rem;
+    margin: .5rem;
+}
+
+.topSalesImageWrapper{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: .5px solid black;
+}
+
+

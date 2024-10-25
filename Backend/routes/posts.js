@@ -1,4 +1,5 @@
 const Products = require("../model/productsmodel")
+const PurchaseOrder = require("../model/purchaseordermodel") 
 const path = require("path")
 
 const addNewProduct = async (req, res) => {
@@ -35,5 +36,51 @@ const addNewProduct = async (req, res) => {
 
 }
 
-module.exports = {addNewProduct}
+const orders = async (req, res) => {
+    try {
+        const {filterCartItems, firstname, lastname, address, aptnumber, city, state, zipcode, email, phonenumber, shipMtd, emailme, grandTotalAmount} = req.body
+
+        console.log("data received", req.body)
+
+        const item = filterCartItems.map((elem) => ({
+            id: elem._id,
+            price: parseFloat(elem.price),
+            quantity: parseFloat(elem.quantity)
+        }))
+
+        const total = parseFloat(grandTotalAmount)
+        const trackingNumber = `${Date.now()}-${Math.floor(Math.random() * 1000)}`
+
+        const result = await PurchaseOrder.create({
+            item: item,
+            contact: {
+                firstname,
+                lastname,
+                phonenumber,
+                email,
+                address: {
+                    streetname: address,
+                    apt: aptnumber,
+                    zipcode,
+                    city,
+                    state,
+                }
+            },
+            emailme,
+            shippingmethod: shipMtd,
+            grandtotal: total,
+            ordertrackingnumber: trackingNumber
+        });
+
+        res.json(result);
+        
+    } catch (error) {
+        console.log("Error inserting order data", error)
+        return res.status(500).json({message: "Internal server issue"})
+    }
+}
+
+
+
+module.exports = {addNewProduct, orders}
 

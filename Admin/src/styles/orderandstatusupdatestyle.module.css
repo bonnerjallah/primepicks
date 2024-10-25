@@ -1,0 +1,178 @@
+:root {
+    --border-size: 2px;
+}
+
+.mainContainer {
+    width: 100%;
+    height: calc(100dvh - 4rem); 
+    grid-column: 2;
+    margin-top: 4rem;
+    display: flex;
+    flex-direction: column;
+    background-color: #8bc9fc;
+    padding: 0 .5rem;
+    overflow-y: hidden;
+}
+
+.mainContainer h1{
+    margin: 0 0 1rem 1rem;
+    color: #72195a;
+}
+
+.mainContainer label{
+    margin: 0 0 0 1rem;
+}
+
+.subContainer{
+    display: grid;
+    grid-template-columns: 20% 75%;
+    height: 100%;
+    column-gap: 1rem;
+    justify-content: space-between;
+    padding-top: .5rem;
+}
+
+
+.orderTrackingNumContainer{
+    width: 100%;
+}
+
+.orderTrackingNumContainer h2{
+    background-color: darkblue;
+    text-align: center;
+    padding: .2rem;
+    color: white;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.orderTrackingNumContainer ul{
+    padding: .2rem;
+    list-style: none;
+}
+
+.orderTrackingNumContainer ul li:hover{
+    background-color: white;
+    color: blue;
+    cursor: pointer;
+}
+
+.fillOrderFormContainer{
+    height: 30rem;
+}
+
+.fillOrderFormContainer > :first-child h2{
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    background-color: darkblue;
+    color: white;
+
+}
+
+.orderDetails{
+    display: flex;
+    border-left: none;
+    border-right: none;
+    justify-content: space-evenly;
+    padding: .5rem 0;
+    background-color: aliceblue;
+    border-bottom: 1px solid black;
+}
+
+.orderDetails div h3{
+    text-decoration: underline;
+}
+
+
+.orderDetailsContainer{
+    background-color: white;
+    display: flex;
+    row-gap: .5rem;
+    flex-direction: column;
+    max-height: 60%;
+    width: 100%;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    padding: .5rem 0;
+}
+
+.orderDetailsHeader{
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.2rem;
+    background-color: #8bc9fc;
+}
+
+.orderDetailsHeader p{
+    width: 20%;
+    display: flex;
+    justify-content: center;
+}
+
+.itemWrapper{
+    display: flex;
+}
+
+.itemWrapper :first-child{
+    padding: .5rem;
+}
+
+.itemWrapper :last-child{
+    font-size: 2rem;
+}
+
+.itemWrapper > *{
+    width: 20%;
+}
+
+.itemWrapper > *:not(:first-child){
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.orderStatusWrapper p{
+    padding: 2rem;
+    color: white;
+    height: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5rem;
+}
+
+.ellipsisIcon{
+    cursor: pointer;
+}
+
+.shipOrderbttn{
+    width: 7rem;
+    height: 2rem;
+    border-radius: 5px;
+    border: none;
+    background-color: darkblue ;
+    color: white;
+    cursor: pointer;
+    position: relative;
+    align-self: center;
+    margin-top: 1rem;
+}
+
+.shipOrderbttn::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: var(--border-size) solid darkblue;
+}
+
+.shipOrderbttn:hover::before{
+    top: calc(var(--border-size) * -2);
+    left: calc(2px * -2);
+    right: calc(2px * -2);
+    bottom: calc(2px * -2);
+    border-radius: 5px;
+}
