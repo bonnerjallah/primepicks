@@ -85,23 +85,26 @@ export const CartProvider = ({ children }) => {
 
 
     const totalAmount = useMemo(() => {
-        const amount = cartItems.reduce((sum, elem) => {
     
-            const price = typeof elem.price === "string" ? elem.price.replace(/,/g, "") : elem.price
-
-            const parsedPrice = parseFloat(price) || 0
-
-            const discountprice = parsedPrice - (elem.salepercentage  * parsedPrice / 100)
+        const amount = cartItems.reduce((sum, elem) => {
+            const price = typeof elem.price === "string" ? elem.price.replace(/,/g, "") : elem.price;
+    
+            const parsedPrice = parseFloat(price) || 0;
+    
+            const salePercentage = parseFloat(elem.salepercentage) || 0;
+            const discountPrice = parsedPrice - (salePercentage * parsedPrice / 100);
     
             const quantity = elem.quantity ? parseInt(elem.quantity, 10) : 1;
-
-            const totalCostForItem = discountprice * quantity;
-
-            return sum + totalCostForItem;
-        }, 0);  
+            const totalCostForItem = discountPrice * quantity;
     
-        return amount.toLocaleString("en-US", {minimumFractionDigits:2, maximumFractionDigits:2});
+            const newSum = sum + totalCostForItem;
+    
+            return newSum;
+        }, 0);
+    
+        return amount.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
     }, [cartItems]);
+    
 
 
     return (

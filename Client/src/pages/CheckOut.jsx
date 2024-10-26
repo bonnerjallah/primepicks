@@ -120,6 +120,7 @@ const CheckOut = () => {
             state
         }
 
+        console.log('datatosubmit', dataToSubmit)
 
         try {
             const response = await axios.post(`${backEndUrl}/purchaseorders`, dataToSubmit, {
@@ -186,14 +187,6 @@ const CheckOut = () => {
                 const response = await axios.get(`${backEndUrl}/getallproducts`,)
                 const data = response.data
 
-                const formatedData = data.map((elem) => ({
-                    ...elem,
-                    price: typeof elem.price === "number" ? elem.price.toLocaleString("en-US", {minimumFractionDigits: 2, maximumFractionDigits: 2}) 
-                    : elem.price
-                }))
-
-                // setAllProducts(formatedData)
-
                 const filterItems = data.filter(elem => 
                     cartItems.some(cartelem => cartelem.id === elem._id)
                 );
@@ -202,7 +195,6 @@ const CheckOut = () => {
                     const cartItem = cartItems.find(cartelem => cartelem.id === elem._id);
                     const quantity = cartItem ? cartItem.quantity : 1;
 
-                    //Ensure the price is a string
                     const price = typeof elem.price === "string" ? elem.price.replace(/,/g, "") : elem.price
 
                     const parsedPrice = parseFloat(price) || 0
@@ -230,6 +222,8 @@ const CheckOut = () => {
     const handleShippingMethod = (ev) => {
         setShippingMethod(ev.target.value)
     }
+
+
 
     useEffect(() => {
         const handleGrandTotalAmount = () => {
@@ -261,8 +255,6 @@ const CheckOut = () => {
         }
     };
     
-
-
 
 
     return (

@@ -40,15 +40,13 @@ const orders = async (req, res) => {
     try {
         const {filterCartItems, firstname, lastname, address, aptnumber, city, state, zipcode, email, phonenumber, shipMtd, emailme, grandTotalAmount} = req.body
 
-        console.log("data received", req.body)
-
         const item = filterCartItems.map((elem) => ({
             id: elem._id,
-            price: parseFloat(elem.price),
+            price: parseFloat(elem.price.replace(/,/g, "")),
             quantity: parseFloat(elem.quantity)
         }))
 
-        const total = parseFloat(grandTotalAmount)
+        const total = parseFloat(grandTotalAmount.replace(/,/g, ""))
         const trackingNumber = `${Date.now()}-${Math.floor(Math.random() * 1000)}`
 
         const result = await PurchaseOrder.create({

@@ -253,4 +253,17 @@ h2 span{
     border: .5px solid black;
 }
 
+.topItemWrapper{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: .5rem;
+    border-bottom: 1px solid black;
+}
 
+.reportWrapper div,
+.inventoryReportWrapper div,
+.budgetReportWrapper div{
+    height: 90%;
+    z-index: 1;
+}

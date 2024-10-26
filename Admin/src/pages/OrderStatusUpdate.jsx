@@ -58,6 +58,7 @@ const OrderStatusUpdate = () => {
         displayOrder(id);
     }, [id, allOrders, displayOrder]);
 
+    
 
     return (
         <div className={orderandstatusupdatestyle.mainContainer} >
@@ -142,17 +143,23 @@ const OrderStatusUpdate = () => {
 
                         <div className={orderandstatusupdatestyle.orderDetailsContainer}>
                             {orderToDisplay && orderToDisplay.item && orderToDisplay.item.length > 0 ? (
-                                orderToDisplay.item.map((elem, id) => (
-                                    <div key={id} className={orderandstatusupdatestyle.itemWrapper}>
-                                        <div>
-                                            <img src={`${backEndUrl}/productimages/${elem.image}`} alt="order images" width={70} height={70} />
+                                orderToDisplay.item.map((elem, id) => {
+                                    return (
+                                        <div key={id} className={orderandstatusupdatestyle.itemWrapper}>
+                                            <div>
+                                                {elem.image ? (
+                                                    <img src={`${backEndUrl}/productimages/${elem.image}`} alt={elem.title} width={100} height={100} />
+                                                ) : (
+                                                    'No image available'
+                                                )}
+                                            </div>
+                                            <p>{elem.title}</p>
+                                            <p>{elem.quantity}</p>
+                                            <p style={{color:color}}>{orderToDisplay.orderstatus}</p>                                     
+                                            <p onClick={(e) => handleOrderFiled(e, elem._id)}><FontAwesomeIcon icon={faEllipsis} className={orderandstatusupdatestyle.ellipsisIcon} /></p>
                                         </div>
-                                        <p>{elem.title}</p>
-                                        <p>{elem.quantity}</p>
-                                        <p style={{color:color}}>{orderToDisplay.orderstatus}</p>                                     
-                                        <p onClick={(e) => handleOrderFiled(e, elem._id)}><FontAwesomeIcon icon={faEllipsis} className={orderandstatusupdatestyle.ellipsisIcon} /></p>
-                                    </div>
-                                ))
+                                    )
+                                })
                 
                             ) : (
                                 <>
