@@ -120,8 +120,6 @@ const CheckOut = () => {
             state
         }
 
-        console.log('datatosubmit', dataToSubmit)
-
         try {
             const response = await axios.post(`${backEndUrl}/purchaseorders`, dataToSubmit, {
                 headers: {"Content-Type": "application/json"}

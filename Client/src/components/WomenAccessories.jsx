@@ -35,7 +35,9 @@ const WomenAccessories = () => {
                     : elem.price
                 }))
 
+
                 const womenAccessData = formatedData.filter((elem) => elem.category.includes("women's") && elem.category.includes("accessories"));
+
 
                 setWomenAccessoriesData(womenAccessData)
 

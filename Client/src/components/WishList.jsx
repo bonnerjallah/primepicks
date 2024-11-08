@@ -71,8 +71,6 @@ const WishList = () => {
         navigate(-1)
     }
 
-    console.log(wishListProducts)
-
 
     return (
         <>

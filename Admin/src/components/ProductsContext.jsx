@@ -67,8 +67,6 @@ export const ProductsProvider = ({children}) => {
             })
 
             if(response.status === 200) {
-                console.log("Successfully added item to database")
-
                 setAllProducts((prevProd) => [...prevProd, response.data])
             }
             
@@ -252,7 +250,6 @@ export const ProductsProvider = ({children}) => {
             })
 
             if(response.status === 200) {
-                console.log("deleted item data successfully")
 
                 setProductToEdit({
                     category: "",

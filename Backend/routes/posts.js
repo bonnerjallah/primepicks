@@ -4,8 +4,6 @@ const path = require("path")
 
 const addNewProduct = async (req, res) => {
     try {
-
-        console.log("data recieved", req.body)
         
         const {title, price, description, category, rating, count} = req.body;
         const image = req.file ? path.basename(req.file.path) : "";

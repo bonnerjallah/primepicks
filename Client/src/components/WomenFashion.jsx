@@ -46,6 +46,8 @@ const WomenFashion = () => {
         fetchData()
     }, [])
 
+    console.log("women", womenStoreData)
+
     //Handle sorting 
     const handleSortWomenStoreData = (e) => {
         const selectedValue = e.target.value

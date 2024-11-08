@@ -33,8 +33,6 @@ const getOrders = async (req, res) => {
         
         const result = await PurchaseOrder.find().exec()
 
-        console.log("results", result)
-
         return res.status(200).json(result)
         
     } catch (error) {
@@ -42,5 +40,7 @@ const getOrders = async (req, res) => {
         return res.status(500).json({message: "Internal server issue"})
     }
 }
+
+
 
 module.exports = {getAllProducts, getallSubscribedMember, getOrders}

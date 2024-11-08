@@ -19,7 +19,7 @@ export const AuthProvider = ({ children }) => {
 
         if (!authContext) return
     
-        const { setLoggedIn, setUser } = authContext;
+        const { setLoggedIn, setUser, logOut } = authContext;
 
         try {
             const response = await axios.post(`${backEndUrl}/refresh_token`, {}, {
@@ -32,7 +32,7 @@ export const AuthProvider = ({ children }) => {
 
                 setLoggedIn(true);
                 setUser(userData);
-                console.log("token successfully refresh man")
+                // console.log("token successfully refresh man")
 
             } else {
                 console.error("Token validation failed", response.status);

@@ -11,18 +11,27 @@ import InventoryManagement from "./pages/InventoryManagement"
 import ViewOrderAndStatus from "./pages/ViewOrderAndStatus"
 import Billing from "./pages/Billing"
 import OrderStatusUpdate from "./pages/OrderStatusUpdate"
+import SignUpLogin from "./pages/SignUpLogin"
+import ProtectedRoutes from "./components/ProtectedRoutes"
 
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<Nav/>}>
-      <Route path="/" element={<Home/>}/>
-      <Route path="/ModifyProducts" element={<ModifyProducts />} />
-      <Route path="/InventoryManagement/:id" element={<InventoryManagement />} />
-      <Route path="/ViewOrderAndStatus" element={<ViewOrderAndStatus />} />
-      <Route path="/Billing" element={<Billing />}/>
-      <Route path="/OrderStatusUpdate/:id" element={<OrderStatusUpdate/>} />
+    <Route>
+      <Route path="/" element={<SignUpLogin />} />
+      <Route path="/" element={<Nav/>}>
+        <Route element={<ProtectedRoutes />} >
+          <Route path="/Home" element={<Home/>}/>
+          <Route path="/ModifyProducts" element={<ModifyProducts />} />
+          <Route path="/InventoryManagement/:id" element={<InventoryManagement />} />
+          <Route path="/ViewOrderAndStatus" element={<ViewOrderAndStatus />} />
+          <Route path="/Billing" element={<Billing />}/>
+          <Route path="/OrderStatusUpdate/:id" element={<OrderStatusUpdate/>} />
+        </Route>
+      </Route>
+
     </Route>
+    
   )
 )
 

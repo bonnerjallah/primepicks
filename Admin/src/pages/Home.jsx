@@ -7,6 +7,7 @@ const backEndUrl = import.meta.env.VITE_BACKEND_URL
 import ReportChart from '../components/ReportChart';
 import ChartOfInventory from "../components/ChartOfInventory"
 import BudgetChart from '../components/BudgetChart';
+import UseMap from '../components/UseMap';
 
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -81,10 +82,6 @@ const Home = () => {
         }
     }, [allOrders]);
 
-    
-    
-
-    
 
     // Calculate most sold items when allOrders updates
     useEffect(() => {
@@ -94,7 +91,6 @@ const Home = () => {
     }, [allOrders]); 
 
 
-    console.log("allorders", allOrders)
 
     return (
 
@@ -112,10 +108,8 @@ const Home = () => {
                             <div className={homestyle.subBoxWrapper}>
                                 <FontAwesomeIcon icon={faCartShopping} className={homestyle.subIcon} />
                                 <div>
-                                    
-
                                     {totalSaleAmount && (
-                                        <p style={{color: "black", fontSize:"1.5rem"}}>$ {totalSaleAmount}</p>
+                                        <p className={homestyle.priceAmount} style={{color: "black"}}>$ {totalSaleAmount}</p>
                                     )}
                                     <span style={{color: saleAmountColorChange}} ><FontAwesomeIcon icon={saleArrowIcon} /> {Math.abs(salePercentageChange.toFixed(2))}%</span>  
                                     <span style={{color: saleAmountColorChange}}>
@@ -129,7 +123,7 @@ const Home = () => {
                             <div className={homestyle.subBoxWrapper}>
                                 <FontAwesomeIcon icon={faDollarSign} className={homestyle.subIcon} />
                                 <div>
-                                    <p style={{color: "black", fontSize:"1.5rem"}}>$ 87,762.96</p>
+                                    <p className={homestyle.priceAmount} style={{color: "black"}}>$ 87,762.96</p>
                                     <span style={{color: "green"}} ><FontAwesomeIcon icon={faArrowUp} /> 7%</span>  
                                     <span style={{color: "green"}}>Increased</span>  
                                 </div>
@@ -140,7 +134,7 @@ const Home = () => {
                             <div className={homestyle.subBoxWrapper}>
                                 <FontAwesomeIcon icon={faCreditCard} className={homestyle.subIcon} />
                                 <div>
-                                    <p style={{color: "black", fontSize:"1.5rem"}}>$ 24,662.55</p>
+                                    <p className={homestyle.priceAmount} style={{color: "black"}}>$ 24,662.55</p>
                                     <span style={{color: "red"}} ><FontAwesomeIcon icon={saleArrowIcon} /> 7%</span>  
                                     <span style={{color: "red"}}>Expense</span>  
                                 </div>
@@ -149,29 +143,34 @@ const Home = () => {
                         
                     </div>
 
+                    <div className={homestyle.reportWrapper}>
+                        <h2>Reports <span><FontAwesomeIcon icon={faEllipsis} /></span></h2>
+                        <div>
+                            <ReportChart/>
+                        </div>
+                    </div>
+
                     <div className={homestyle.customerBoxWrapper}>
                         <h2>Members <span><FontAwesomeIcon icon={faEllipsis} /></span></h2>
 
                         <div>
-                            <div className={homestyle.customersBox}>
                             <div className={homestyle.customerSubBoxWrapper}>
-                            <FontAwesomeIcon icon={faUsers} className={homestyle.userIcon} />
-                            <div>
-                                {subMembers && subMembers.length > 0 && (
-                                    <p style={{color: "black", fontSize:"1.5rem"}}>{subMembers.length}</p>
-                                )}
+                                <FontAwesomeIcon icon={faUsers} className={homestyle.userIcon} />
+                                <div>
+                                    {subMembers && subMembers.length > 0 && (
+                                        <p style={{color: "black", fontSize:"1.5rem"}}>{subMembers.length}</p>
+                                    )}
 
-                                <span style={{color: changeColor}}>
-                                    <FontAwesomeIcon icon={arrowIcon} /> {Math.abs(memberpercentageChange.toFixed(2))} % 
-                                </span>
-    
-                                <span style={{color: changeColor}}>
-                                    {memberpercentageChange >= 0 ? "Increase" : "Decrease"}
-                                </span>  
-                            </div>
+                                    <span style={{color: changeColor}}>
+                                        <FontAwesomeIcon icon={arrowIcon} /> {Math.abs(memberpercentageChange.toFixed(2))} % 
+                                    </span>
+        
+                                    <span style={{color: changeColor}}>
+                                        {memberpercentageChange >= 0 ? "Increase" : "Decrease"}
+                                    </span>  
+                                </div>
                         </div>
 
-                            </div>
                             <div className={homestyle.customerListWrapper}>
                                 <div className={homestyle.customerBioWapper}>
                                     <p>Name</p>
@@ -196,13 +195,6 @@ const Home = () => {
                             </div>
                         </div>
                         
-                    </div>
-
-                    <div className={homestyle.reportWrapper}>
-                        <h2>Reports <span><FontAwesomeIcon icon={faEllipsis} /></span></h2>
-                        <div>
-                            <ReportChart/>
-                        </div>
                     </div>
 
                     <div className={homestyle.recentSalesWrapper}>
@@ -313,6 +305,9 @@ const Home = () => {
 
                     <div className={homestyle.websiteTrafficWrapper}>
                         <h2>Website Traffic <span><FontAwesomeIcon icon={faEllipsis} /></span></h2>
+                        <div>
+                            <UseMap />
+                        </div>
                     </div>
 
                     <div className={homestyle.auditLogs}>

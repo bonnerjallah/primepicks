@@ -47,9 +47,10 @@ const Sidebar = () => {
 
             <div className={sidebarstyle.selectionContainer}>
                 <ul className={sidebarstyle.listItems}>
+                    
                     <div onClick={() => handleItemClick(1)} className={`${sidebarstyle.listHeaderWrapper} ${activeItem === 1  ? sidebarstyle.active : ''}`}>
                         <FontAwesomeIcon icon={faHouse}  className={sidebarstyle.icon}/> 
-                        <NavLink to="/"><p>Dashboard</p></NavLink>
+                        <NavLink to="/Home"><p>Dashboard</p></NavLink>
                     </div>
 
                     <li>

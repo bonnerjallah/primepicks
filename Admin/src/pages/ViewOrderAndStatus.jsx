@@ -14,7 +14,6 @@ const ViewOrderAndStatus = () => {
         fetchAllOrders()
     }, [])
 
-    console.log("all orders", allOrders)
 
     return (
         <div className={vieworderstyle.mainContainer}>

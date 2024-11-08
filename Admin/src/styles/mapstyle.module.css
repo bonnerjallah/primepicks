@@ -1,0 +1,27 @@
+.mainsvgContainer {
+    fill: #8bc9fc
+}
+
+.mainsvgContainer path{
+    stroke: red;
+}
+
+
+.mainsvgContainer path:hover{
+    fill: rgb(95, 95, 101);
+    cursor: pointer;
+}
+
+.tooltipContainer{
+    color: white;
+    width: max-content;
+    position: absolute;
+    pointer-events: none; 
+}
+
+.tooltipContainer span{
+    background-color: black;
+    border-radius: 5px;
+    padding: .2rem;
+    height: max-content;
+}

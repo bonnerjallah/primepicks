@@ -1,11 +1,13 @@
 
 .mainContainer{
-    width: 100%;
+    min-width: 0; /* Allow it to shrink below its content */
+    max-width: 100%;
     grid-column: 2;
     margin-top: 4rem;
     display: flex;
     flex-direction: column;
     background-color: #8bc9fc;
+    flex-shrink: 1;
 }
 
 .mainContainer h1{
@@ -13,11 +15,17 @@
     color: #72195a;
 }
 
-.subContainer{
+.subContainer {
     display: grid;
     grid-template-columns: 70% 30%;
     border-radius: 5px;
+    max-width: 100%; 
 }
+
+.subContainer > * {
+    max-width: 100%; 
+}
+
 
 .middleSection{
     display: flex;
@@ -28,9 +36,11 @@
 
 .topOfMiddleSection{
     display: flex;
-    width: 100%;
+    max-width: 100%;
     justify-content: space-evenly;
+    flex-wrap: wrap;
 }
+
 
 .salesBox,
 .revenueBox,
@@ -108,11 +118,9 @@ h2 span{
     border-radius: 50%;
 }
 
-.subBoxWrapper div{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    row-gap: .5rem;
+
+.subBoxWrapper > div p{
+    font-size: 1.5rem;
 }
 
 .customerBoxWrapper{
@@ -143,22 +151,21 @@ h2 span{
     height: 80%;
 }
 
-.customersBox{
-    width: 50%;
-    height: 10rem;
-    padding: 1rem;
-}
 
 .customerSubBoxWrapper div{
     display: flex;
     flex-direction: column;
     align-items: center;
     row-gap: .5rem;
+    width: 30%;
+    height: 10rem;
 }
 
 .customerListWrapper{
     width: 50%;
+    border: 2px solid #090c9b;
 }
+
 
 .customerBioWapper{
     background-color: #090c9b;
@@ -187,11 +194,12 @@ h2 span{
 
 .subscriberWrapper ul li{
     list-style: none;
-    border-bottom: 1px solid WHITE;
+    border-bottom: 1px solid #090c9b;
     display: flex;
     justify-content: space-between;
     padding: 0 1rem;
     margin: .2rem 0;
+    width: 100%;
 }
 
 .saleCustomerHeader,
@@ -206,7 +214,7 @@ h2 span{
 
 .saleCustomerHeader p,
 .orderdetailsWrapper p{
-    width: 7rem;
+    width: 20%;
 }
 
 
@@ -220,7 +228,8 @@ h2 span{
 .orderdetailsWrapper{
     display: flex;
     justify-content: space-between;
-    border: .5px solid black;
+    border: 1px solid black;
+    margin-top: .3rem;
 }
 
 .orderdetailsWrapper p{
@@ -228,10 +237,16 @@ h2 span{
     justify-content: cneter;
     align-items: center;
     padding-left: .4rem;
+    width: 20%;
 }
 
 .orderdetailsWrapper > :first-child {
     font-size: .8rem;
+}
+
+.orderdetailsWrapper > :nth-child(2) {
+    display: flex; 
+    flex-wrap: wrap;
 }
 
 .productImageAndPriceWrapper{
@@ -243,14 +258,16 @@ h2 span{
     width: 20rem;
     max-height: 5rem;
     padding-left: 2rem;
-    margin: .5rem;
+    padding-right: 3rem;
+    background-color: #b0b0f1;
+
 }
 
 .topSalesImageWrapper{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border: .5px solid black;
+    width: 100%;
 }
 
 .topItemWrapper{
@@ -263,7 +280,165 @@ h2 span{
 
 .reportWrapper div,
 .inventoryReportWrapper div,
-.budgetReportWrapper div{
+.budgetReportWrapper div,
+.websiteTrafficWrapper div{
     height: 90%;
     z-index: 1;
+}
+
+
+.topItemWrapper > p {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 20%;
+}
+
+.priceWrapper p{
+    width: 6rem;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.priceAmount{
+    width: max-content;;
+}
+
+@media(max-width: 1000px){
+    .subContainer{
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+
+@media(max-width:1185px) {
+    .topOfMiddleSection h2{
+        font-size: 1rem;
+    }
+
+    .subBoxWrapper > div p{
+        font-size: 1rem;
+    }
+}
+
+@media(max-width:955px) {
+    .subIcon{
+        width: 9%;
+        height: 1rem;
+    }
+
+    .subBoxWrapper{
+        column-gap: 0;
+    }
+
+    .expensesBox .subBoxWrapper div {
+        margin-top: -1.5rem;
+    }
+}
+
+
+@media(max-width: 1190px){
+    .subscriberWrapper ul li span{
+        font-size: .7rem;
+    }
+}
+
+@media(545px <= width <= 700px){
+    .saleCustomerHeader,
+    .topSellingHeader{
+        font-size: 1rem;
+    }
+
+    .productImageAndPriceWrapper{
+        display: flex;
+        flex-direction: column;
+        overflow-y: scroll;
+        scroll-behavior: smooth;
+        row-gap: .2rem;
+        width: 20rem;
+        max-height: 5rem;
+        padding-left: 2rem;
+        padding-right: 3rem;
+    }
+
+
+    .orderdetailsWrapper p{
+        width: max-content;
+        flex-wrap: wrap;
+    }
+
+    .topSalesImageWrapper{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        width: 100%;
+        font-size: .8rem;
+    }
+    
+
+}
+
+
+@media(300px <= width <= 545px){
+    .saleCustomerHeader,
+    .topSellingHeader{
+        font-size: 1rem;
+    }
+
+    .productImageAndPriceWrapper{
+        display: flex;
+        flex-direction: column;
+        overflow-y: scroll;
+        scroll-behavior: smooth;
+        row-gap: .2rem;
+        width: 20rem;
+        max-height: 5rem;
+        padding-left: 1rem;
+    }
+
+
+    .orderdetailsWrapper p{
+        width: max-content;
+        flex-wrap: wrap;
+    }
+
+    .topSalesImageWrapper{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+    }
+
+}
+
+
+@media(300px <= width <= 485px){
+    .topOfMiddleSection{
+        display: flex;
+        width: 100%;
+        justify-content: space-evenly;
+    }
+    
+    .topOfMiddleSection div{
+        width: 30%;
+    }
+
+    .subBoxWrapper div span{
+        font-size: .8rem;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .subBoxWrapper div .priceAmount{
+        font-size: .9rem;
+        width: max-content;
+    }
+
+    .topOfMiddleSection div {
+    }
+}
+
+.topOfMiddleSection div {
+    width: max-content;
 }

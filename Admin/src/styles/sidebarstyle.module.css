@@ -111,3 +111,42 @@
     100%{opacity: 1; margin-top: 0;}
 }
 
+@media(max-width:1220px){
+    .headerWrapper h1{
+        font-size: 1.5rem;
+    }
+
+    .listHeaderWrapper{
+        display: flex;
+        flex-direction: column;
+        column-gap: .2rem;
+        position: relative;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+
+    .angleRightIcon{
+        display: none;
+    }
+}
+
+@media(300px <= width <= 1045px) {
+
+    .listItems li ul li{
+        background-color: rgb(39, 57, 65);
+        width: max-content;
+        color: white;
+    }
+}
+
+@media(width <= 500px) {
+    .headerWrapper h1{
+        font-size: 1.2rem;
+    }
+
+    .listItems a p{
+        font-size: 1rem;
+    }
+
+}
+

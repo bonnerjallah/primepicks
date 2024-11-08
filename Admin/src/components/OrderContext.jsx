@@ -19,8 +19,6 @@ export const OrderProvider = ({children}) => {
 
 
 
-
-
     const fetchAllOrders = useCallback(async () => {
     
         try {
@@ -71,12 +69,11 @@ export const OrderProvider = ({children}) => {
                         return {
                             ...elem,
                             ...matchingProduct,
-                            image: matchingProduct.image || null // Set image if available, else null
+                            image: matchingProduct.image || null 
                         };
                     })
                 };
                 
-                console.log("orderwithimage", orderWithImage);
                 setOrderToDisPlay(orderWithImage);
             }
 
@@ -131,25 +128,20 @@ export const OrderProvider = ({children}) => {
                         // Increment the quantity count for the item
                         itemCounts[itemElem.id].quantity += itemElem.quantity;
     
-                        // Add the current order to the orders array for this item
-                        // itemCounts[itemElem.id].orders.push(order);
                     });
                 }
             });
         }
     
-        // Convert the itemCounts object to an array and filter items with quantity > 1
-        const soldItemsArray = Object.values(itemCounts).filter(item => item.quantity > 1);
+        const soldItemsArray = Object.values(itemCounts)
+            .filter(item => item.quantity > 1)
+            .sort((a, b) => b.quantity - a.quantity)
+            .slice(0, 3);
     
-        // Sort by quantity in descending order
-        soldItemsArray.sort((a, b) => b.quantity - a.quantity);
+
     
         setMostSoldItems(soldItemsArray);
     }, [allOrders, allProducts]);
-    
-    
-    
-
 
 
     useEffect(() => {

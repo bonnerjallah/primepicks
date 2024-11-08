@@ -7,7 +7,7 @@ const {addNewProduct, orders} = require("./posts")
 const {getAllProducts, getallSubscribedMember, getOrders} = require("./gets")
 const {editProduct, orderShipped} = require("./puts")
 const {deleteItem} = require("./deletes")
-const {register, login, validateAccessToken, refreshToken, getMember, logOut} = require("../controllers/controller")
+const {register, login, validateAccessToken, refreshClientToken, getMember, logOut, adminuserregister, adminLogin, getAdminMember, validateAdminAccessToken, refreshAdminToken, adminLogOut} = require("../controllers/controller")
 
 
 const router = express.Router();
@@ -46,16 +46,21 @@ const upload = multer({
 
 router.get("/getallproducts", getAllProducts)
 router.get("/getmember", validateAccessToken, getMember)
+router.get("/getadminuser", validateAdminAccessToken, getAdminMember )
 router.get("/getallsubscribedmembers", getallSubscribedMember)
 router.get("/getorders", getOrders)
 
 
-router.post("/addproduct", upload.single("image"), addNewProduct)
-router.post("/register", register)
-router.post("/loginmember", login)
-router.post("/refresh_token", refreshToken)
-router.post("/logout", logOut)
-router.post("/purchaseorders", orders )
+router.post("/addproduct", upload.single("image"), addNewProduct);
+router.post("/register", register);
+router.post("/loginmember", login);
+router.post("/logout", logOut);
+router.post("/refreshmembertoken", refreshClientToken);  
+router.post("/refreshadmintoken", refreshAdminToken);   
+router.post("/purchaseorders", orders);
+router.post("/registeradminuser", adminuserregister);
+router.post("/loginadminuser", adminLogin);
+router.post("/adminlogout", adminLogOut)
 
 router.put("/editproduct", upload.single("editedImage"), editProduct)
 router.put("/shiporder/:id", orderShipped)

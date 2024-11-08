@@ -22,8 +22,6 @@ const netIncome = data.map(elem => ({
     "Total Expenses": elem["Total Expenses"]
 }));
 
-console.log(netIncome);
-
 
 // Custom tooltip function
 const CustomTooltip = ({ active, payload }) => {

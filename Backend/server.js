@@ -1,6 +1,7 @@
 const express = require("express")
 const cors = require("cors")
 
+
 const connectDB = require("./config/db")
 const router = require("./routes/router")
 const cookieParser = require("cookie-parser")
@@ -22,6 +23,8 @@ app.use(cors({
 }))
 
 connectDB()
+
+
 
 
 app.use("/", router)
