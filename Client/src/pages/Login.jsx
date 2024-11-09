@@ -90,9 +90,8 @@ const Login = () => {
             }
 
         } catch (error) {
-            console.log("Error logging in User", error)
-            if(error.response.data.message === "User already exists") {
-                setErrorMsg("User already exists")
+            if(error && error.response.data && error.response.data.message) {
+                setErrorMsg(error.response.data.message)
             }
             setTimeout(() => {
                 setErrorMsg("")
@@ -101,16 +100,13 @@ const Login = () => {
     }
 
 
-
-
     return (
 
         <>
             <ScrollToTop />
+
             {showSignUp ? (
                 <div className={loginstyle.mainContainer}>
-
-                    {errorMsg && (<p style={{color: "red", font:"2rem", marginTop:"10rem", zIndex:"9999"}}>{errorMsg}</p>)}
 
                     <h1>Create Account</h1>
 
@@ -131,6 +127,7 @@ const Login = () => {
                             <input type="password" name="pwd" id="Password" value={signUpData.pwd || ""} placeholder='Password' onChange={handleDataInput} />
                         </label>
                         <button>CREATE</button>
+
                     </form>
 
                     <NavLink to="/">
@@ -140,7 +137,11 @@ const Login = () => {
 
                 </div>
             ):(
+                
                 <div className={loginstyle.mainContainer}>
+
+                    {errorMsg && (<p style={{color: "red", font:"2rem", marginTop:"10rem", zIndex:"9999"}}>{errorMsg}</p>)}
+                    
                     <h1>Login</h1>
 
                     <form onSubmit={handleLoginSubmit} method="POST">

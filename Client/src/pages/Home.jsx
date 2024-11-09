@@ -11,13 +11,10 @@ import { useState, useRef } from "react";
 const backEndUrl = import.meta.env.VITE_BACKENDURL
 
 import RandomTwelve from "../components/RandomTwelve";
-import { useCart } from "../components/CartContext";
-import MoreDetails from "../components/MoreDetails";
 
 
 const Home = () => {
 
-    // const {cartItems, addToCart, removeFromCart, totalPriceOfQuantity, totalAmount} = useCart()
 
     const shopnowRef = useRef()
 

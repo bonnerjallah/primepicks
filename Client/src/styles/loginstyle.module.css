@@ -72,3 +72,16 @@
     color: white;
     border-radius: 5px;
 }
+
+p.errorMsg {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: yellow;
+    color: red;
+    padding: 1rem;
+    border: 1px solid black;
+    z-index: 9999;
+}
+
