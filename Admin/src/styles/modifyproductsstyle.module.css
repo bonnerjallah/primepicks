@@ -51,11 +51,13 @@ input[type="number"] {
 
 .productListWrapper{
     background-color: aliceblue;
-    width: 50%;
+    /* width: 50%; */
     height: 90%;
     overflow-y: scroll;
     overflow-x: hidden;
     padding: 1rem;
+    min-width: 0;
+    max-width: 50%;
 }
 
 .addProductWrapper form{
@@ -225,6 +227,9 @@ form button:focus::before,
     justify-content: space-between;
     padding: .5rem;
     border-bottom: 1px solid black;
+    min-width: 0;
+    max-width: 100%;
+    flex-wrap: wrap;
 }
 
 .productsWrapper >{
@@ -252,4 +257,35 @@ form button:focus::before,
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+@media(width <= 750px){
+    .addProductWrapper form fieldset label{
+        display: flex;
+        flex-direction: column;
+        max-width: max-content;
+        flex-wrap: wrap;
+    }
+
+    .addProductWrapper{
+        max-width:50% ;
+        min-width: 0;
+    }
+
+    .opitionsWrapper{
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+    }
+}
+
+@media(300px <= width <= 670px){
+    .addProductWrapper form > label input{
+        width: 90%
+    }
+
+    .addProductWrapper form fieldset label input{
+        border: 2px solid black;
+        display: none;
+    }
 }

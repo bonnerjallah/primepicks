@@ -125,7 +125,7 @@ const ModifyProducts = () => {
                         
                     </div>
 
-                    <div>
+                    <>
                         {filterProducts.length > 0 ? (
                             filterProducts.map((elem, id) => (
                                 <div key={id} className={modifyproductstyle.productsWrapper}>
@@ -203,7 +203,7 @@ const ModifyProducts = () => {
                                 </div>
                             ))
                         )}
-                    </div>
+                    </>
                 </div>
 
                 <div className={modifyproductstyle.addProductWrapper}>

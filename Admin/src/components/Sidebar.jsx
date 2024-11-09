@@ -95,7 +95,7 @@ const Sidebar = () => {
                     <li>
                         <div onClick={() => handleItemClick(4)} className={`${sidebarstyle.listHeaderWrapper} ${activeItem === 4  ? sidebarstyle.active : ''}`}>
                             <FontAwesomeIcon icon={faFileInvoiceDollar}  className={sidebarstyle.icon}/>
-                            <NavLink to="/Billing">
+                            <NavLink>
                                 <p>Billing</p>
                             </NavLink>
                         </div>

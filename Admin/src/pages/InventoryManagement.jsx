@@ -61,9 +61,9 @@ const InventoryManagement = () => {
 
         const isConfirmed = window.confirm("Are you sure you want to delete this item?");
 
-        if(isConfirmed) {
-            handleDeletingItem(id)
-        }
+        // if(isConfirmed) {
+        //     handleDeletingItem(id)
+        // }
     }
 
 
