@@ -169,4 +169,21 @@
     color: white;
 }
 
+@media(300px <= width <= 550px){
+    .mainContainer{
+        display: flex;
+        flex-direction: column;
+        row-gap: 2rem;
+    }
 
+    .intrestProdImageWrapper img {
+        height: 10rem;
+        width: 7rem;
+    }
+
+    .intrestWrapper{
+        display: flex;
+        background-color: skyblue;
+
+    }
+}

@@ -1,5 +1,5 @@
 dialog {
-    width: 40%; /* Ensure dialog has the same width as .mainContainer */
+    width: 40%; 
     height: 95dvh;
     top: 50%;
     left: 50%;
@@ -161,3 +161,11 @@ dialog::backdrop {
     border-radius: 5px;
 }
 
+
+@media(300px <= width <= 550px){
+    dialog {
+        width: 100%; 
+
+    }
+    
+}

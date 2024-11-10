@@ -522,3 +522,77 @@ hr{
         align-items: center;
     }
 }
+
+
+@media(300px <= width <= 550px) {
+    .peopleSayingWrapper{
+        margin-top: 4rem;
+        height: 20rem;
+        width: 15rem;
+        display: flex;
+        align-self: center;
+        column-gap: 1rem;
+        padding: 2rem 0;
+    }
+
+    .subscribeWrapper{
+        margin-top: 3rem;
+        height: 20rem;
+        width:15rem;
+        display: flex;
+        align-self: center;
+        flex-direction: column;
+        background-color: rgb(119, 174, 189);
+    }
+
+    main h2{
+        width: max-content;
+        display: flex;
+        align-self: center;
+    }
+
+    .collectionsWrapper{
+        width: max-content;
+        display: flex;
+        align-self: center;
+        flex-wrap: wrap;
+        column-gap: 2rem;
+        margin-bottom: 3rem;
+        justify-content: center;
+    }
+    
+    .randomPorductContainer{
+        display: flex;
+        column-gap: 1rem;
+        flex-wrap: wrap;
+        flex-shrink: 1;
+        justify-content: space-between;
+        margin: 3rem 3rem;
+    }
+
+    .randomPorductContainer a img{
+        width: 7rem;
+        height: 14rem;
+        margin-left: 1rem;
+    }
+
+    .randomProductPriceAndDetails{
+        /* width: max-content; */
+        display: flex;
+        width: 9rem;
+        flex-direction: column;
+        align-items: center;
+        margin-left: -6rem;
+        flex-wrap: wrap;
+
+    }
+
+    .addtoCartWrapper{
+        display: flex;
+        height: 3rem;
+        justify-content: space-between;
+        align-items: center;
+        margin-left: -4rem;
+    }
+
+}

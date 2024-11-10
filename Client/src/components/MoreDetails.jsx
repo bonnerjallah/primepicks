@@ -355,8 +355,8 @@ const MoreDetails = () => {
                         {intrestProduct.map((elem, id) => (
                             <div key={id} className={moredetailsstyle.intrestWrapper}>
                                 <NavLink to={`/MoreDetails/${elem._id}`}>
-                                <div className={moredetailsstyle.intrestProdImageWrapper} onClick={() => handleIntrestProductDetails(elem._id)}>
-                                    <img src={`${backEndUrl}/productimages/${elem.image}`} alt="" width="100%" height="100%" />
+                                    <div className={moredetailsstyle.intrestProdImageWrapper} onClick={() => handleIntrestProductDetails(elem._id)}>
+                                        <img src={`${backEndUrl}/productimages/${elem.image}`} alt="" width="100%" height="100%" />
                                     </div>
                                 </NavLink>
                                 
