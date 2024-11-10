@@ -1,6 +1,6 @@
 import {createBrowserRouter, createRoutesFromElements, Route, RouterProvider} from "react-router-dom"
 
-import { CartProvider } from "./components/Cartcontext"
+import { CartProvider } from "./components/CartContext"
 
 import Home from "./pages/Home"
 import Navbar from "./components/Navbar"
