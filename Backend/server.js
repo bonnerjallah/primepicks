@@ -7,7 +7,7 @@ const connectDB = require("./config/db")
 const router = require("./routes/router")
 const cookieParser = require("cookie-parser")
 
-const ADMIN_FRONTEND_URL = process.env.VITE_FRONTEND_URL
+const ADMIN_FRONTEND_URL = process.env.ADMIN_FRONTEND_URL
 const CLIENT_FRONTEND_URL = process.env.CLIENT_FRONTEND_URL
 const PORT = process.env.VITE_PORT || 3001
 
