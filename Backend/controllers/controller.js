@@ -3,13 +3,15 @@ const saltRounds = 10;
 
 const jwt = require("jsonwebtoken")
 
-const jwtSec = process.env.VITE_jwtSecret
-const refToken = process.env.VITE_jwtRefreshSecret
-const adminJwtSec = process.env.VITE_adminJwtSecret
-const adminRefToken = process.env.VITE_adminJwtRefreshSecret
+const jwtSec = process.env.JWT_SECRET
+const refToken = process.env.JWT_REFRESH_SECRET
+const adminJwtSec = process.env.ADMIN_JWT_SECRET
+const adminRefToken = process.env.ADMIN_JWT_REFRESH_SECRET
 
 const Member = require("../model/customermodel")
 const AdminUser = require("../model/adminusermodel")
+
+console.log("environment", process.env.NODE_ENV)
 
 // Function to verify refresh tokens
 const verifyRefreshToken = (token, secret) => {
@@ -82,8 +84,8 @@ const login = async (req, res) => {
                 const accessToken = jwt.sign({user:userData}, jwtSec, {expiresIn: "5min"})
                 const refresh_token = jwt.sign({user:userData}, refToken, {expiresIn: "1hr"})
 
-                res.cookie("memberToken", accessToken);
-                res.cookie("refreshMemberToken", refresh_token, { httpOnly: true });
+                res.cookie("memberToken", accessToken, {httpOnly: true, sameSite: "None", secure: process.env.NODE_ENV === "production"});
+                res.cookie("refreshMemberToken", refresh_token, { httpOnly: true, sameSite: "None", secure: process.env.NODE_ENV === "production" });
 
                 return res.status(200).json({
                     message: "Login Successfully",
@@ -117,7 +119,7 @@ const refreshClientToken = async (req, res) => {
         const userData = decoded.user;
 
         const newAccessToken = jwt.sign({ user: userData }, jwtSec, { expiresIn: "5min" });
-        res.cookie("memberToken", newAccessToken, { httpOnly: true });
+        res.cookie("memberToken", newAccessToken, { httpOnly: true, sameSite: "None", secure: process.env.VITE_NODE_ENV === "production" });
 
         return res.status(200).json({message: "Client token refreshed successfully" });
     } catch (err) {
@@ -220,8 +222,8 @@ const adminLogin = async (req, res) => {
                 const accessToken = jwt.sign({ user: userData }, adminJwtSec, { expiresIn: "5min" });
                 const refresh_token = jwt.sign({ user: userData }, adminRefToken, { expiresIn: "1hr" });
 
-                res.cookie("adminToken", accessToken);
-                res.cookie("refreshAdminToken", refresh_token, { httpOnly: true });
+                res.cookie("adminToken", accessToken, {httpOnly: true, sameSite: "None", secure: process.env.NODE_ENV === "production"});
+                res.cookie("refreshAdminToken", refresh_token, { httpOnly: true, sameSite: "None", secure: process.env.NODE_ENV === "production" });
 
                 return res.status(200).json({ message: "Login successfull", userData });
             } else {
@@ -251,7 +253,7 @@ const refreshAdminToken = async (req, res) => {
         const userData = decoded.user;
 
         const newAccessToken = jwt.sign({ user: userData }, adminJwtSec, { expiresIn: "5min" });
-        res.cookie("adminToken", newAccessToken, { httpOnly: true });
+        res.cookie("adminToken", newAccessToken, { httpOnly: true, sameSite: "None", secure: process.env.NODE_ENV === "production" });
 
         // Send back both userData and the new access token
         return res.status(200).json({ userData, accessToken: newAccessToken });    

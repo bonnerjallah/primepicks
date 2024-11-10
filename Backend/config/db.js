@@ -3,7 +3,7 @@ const mongoose = require("mongoose")
 const connectDB = async () => {
     try {   
         
-        await mongoose.connect(process.env.VITE_URI, {dbName: "primepicks"})
+        await mongoose.connect(process.env.MONGODB_URI, {dbName: "primepicks"})
 
         console.log("primepicks mongodb connected")
 

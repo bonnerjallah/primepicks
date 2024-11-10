@@ -6,8 +6,8 @@ const connectDB = require("./config/db")
 const router = require("./routes/router")
 const cookieParser = require("cookie-parser")
 
-const frontEndUrl = process.env.VITE_FRONTEND_URL
-const PORT = process.env.VITE_PORT || 3001
+const frontEndUrl = process.env.FRONTEND_URL
+const PORT = process.env.PORT || 3001
 
 
 const app = express()
