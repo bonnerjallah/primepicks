@@ -260,7 +260,6 @@ const CheckOut = () => {
         <ScrollToTop />
             <div className={checkoutstyle.mainContainer}>
 
-
                 <div className={checkoutstyle.checkOutDetailsContainer}>
                     <form onSubmit={handleCheckOutDataSubmit}>
                         <fieldset className={checkoutstyle.contactMeContainer}>

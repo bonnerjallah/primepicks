@@ -15,9 +15,6 @@
     overflow: scroll;
     overflow-x: hidden;
     scroll-behavior: smooth;
-    display: flex;
-    flex-direction: column;
-    row-gap: 1rem;
 }
 
 .itemWrapper{
@@ -100,3 +97,18 @@
     transform: translateX(0.5rem);
 }
 
+@media(300px <= width <= 880px) {
+    .itemsContainer{
+        display: flex;
+        flex-direction: column;
+        width: max-content;
+    }
+
+    .imageWrapper{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .buttnWrapper{
+    }
+}
