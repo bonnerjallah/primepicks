@@ -8,28 +8,35 @@ const router = require("./routes/router")
 const cookieParser = require("cookie-parser")
 
 const PORT = process.env.PORT || 3001
-const allowedOrigins = [
-    process.env.ADMIN_FRONTEND_URL, 
-    process.env.CLIENT_FRONTEND_URL 
-];
+
+const corsAdmin = cors({
+    origin: process.env.ADMIN_FRONTEND_URL,
+    methods: ["POST", "GET", "PUT", "DELETE"],
+    credentials: true
+});
+
+const corsClient = cors({
+    origin: process.env.CLIENT_FRONTEND_URL,
+    methods: ["POST", "GET", "PUT", "DELETE"],
+    credentials: true
+});
+
 
 const app = express();
+
+app.use(cors());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-app.use(cors({
-    origin: (origin, callback) => {
-        if (!origin || allowedOrigins.includes(origin)) {
-            callback(null, true); // Allow the request
-        } else {
-            callback(new Error("Not allowed by CORS")); // Error for disallowed origins
-        }
-    },
-    methods: ["POST", "GET", "PUT", "DELETE"],
-    credentials: true
-}))
+
+// Apply CORS for admin routes
+app.use('/admin', corsAdmin);
+
+// Apply CORS for client routes
+app.use('/client', corsClient);
+
 
 connectDB()
 
