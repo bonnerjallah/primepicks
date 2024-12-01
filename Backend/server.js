@@ -30,8 +30,6 @@ app.use(cors(corsOptions));
 connectDB()
 
 
-
-
 app.use("/", router)
 
 app.listen(PORT, () => {
